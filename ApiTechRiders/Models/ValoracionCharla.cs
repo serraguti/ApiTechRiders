@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ApiTechRiders.Models
 {
     [Table("VALORACIONESCHARLAS")]
-    public class ValoracionesCharla
+    public class ValoracionCharla
     {
         [Key]
         [Column("IDVALORACION")]

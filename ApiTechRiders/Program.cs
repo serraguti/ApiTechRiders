@@ -6,22 +6,17 @@ using NSwag.Generation.Processors.Security;
 using NSwag;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using ApiTechRiders.Helpers;
+using ApiTechRiders.Repositories;
+using ApiTechRiders.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 string connectionString =
     builder.Configuration.GetConnectionString("SqlAzure");
-//builder.Services.AddTransient<RepositoryDepartamentos>();
-//builder.Services.AddTransient<RepositoryHospitales>();
-//builder.Services.AddTransient<RepositoryTrabajadores>();
-//builder.Services.AddTransient<RepositoryCoches>();
-//builder.Services.AddTransient<RepositoryChampions>();
-//builder.Services.AddTransient<RepositoryEmpleados>();
-//builder.Services.AddTransient<RepositoryDoctores>();
-//builder.Services.AddTransient<RepositoryAlumnos>();
-//builder.Services.AddDbContext<DataBaseContext>
-//    (options => options.UseSqlServer(connectionString));
+builder.Services.AddTransient<RepositoryTechRiders>();
+builder.Services.AddDbContext<TechRidersContext>
+    (options => options.UseSqlServer(connectionString));
 
 
 builder.Services.AddEndpointsApiExplorer();
