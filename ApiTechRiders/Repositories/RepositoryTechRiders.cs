@@ -714,5 +714,190 @@ namespace ApiTechRiders.Repositories
         }
 
         #endregion
+
+        #region PROVINCIAS
+
+        public async Task<List<Provincia>> GetProvinciasAsync()
+        {
+            return await this.context.Provincias.ToListAsync();
+        }
+
+        public async Task<Provincia>
+            FindProvinciaAsync(int id)
+        {
+            return await
+                this.context.Provincias
+                .FirstOrDefaultAsync(x => x.IdProvincia == id);
+        }
+
+        private async Task<int> GetMaxProvincia()
+        {
+            if (this.context.Provincias.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.Provincias.MaxAsync
+                    (z => z.IdProvincia) + 1;
+            }
+        }
+
+        public async Task<Provincia> InsertProvinciaAsync
+            (Provincia requestProvincia)
+        {
+            Provincia newProvincia = new Provincia();
+            newProvincia.IdProvincia =
+                await this.GetMaxProvincia();
+            newProvincia.NombreProvincia = requestProvincia.NombreProvincia;
+            this.context.Provincias.Add(newProvincia);
+            await this.context.SaveChangesAsync();
+            return newProvincia;
+        }
+
+        public async Task UpdateProvinciaAsync
+           (int idprovincia, string nombreprovincia)
+        {
+            Provincia newProvincia = await
+                this.FindProvinciaAsync
+                (idprovincia);
+            newProvincia.NombreProvincia = nombreprovincia;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteProvinciaAsync(int idProvincia)
+        {
+            Provincia provincia = await
+                this.FindProvinciaAsync(idProvincia);
+            this.context.Provincias.Remove(provincia);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region ROLES
+
+        public async Task<List<Role>> GetRolesAsync()
+        {
+            return await this.context.Roles.ToListAsync();
+        }
+
+        public async Task<Role>
+            FindRoleAsync(int id)
+        {
+            return await
+                this.context.Roles
+                .FirstOrDefaultAsync(x => x.IdRole == id);
+        }
+
+        private async Task<int> GetMaxRole()
+        {
+            if (this.context.Roles.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.Roles.MaxAsync
+                    (z => z.IdRole) + 1;
+            }
+        }
+
+        public async Task<Role> InsertRoleAsync
+            (string tipoRole)
+        {
+            Role newRole = new Role();
+            newRole.IdRole =
+                await this.GetMaxRole();
+            newRole.TipoRole = tipoRole;
+            this.context.Roles.Add(newRole);
+            await this.context.SaveChangesAsync();
+            return newRole;
+        }
+
+        public async Task UpdateRoleAsync
+           (int idRole, string tipoRole)
+        {
+            Role newRole = await
+                this.FindRoleAsync
+                (idRole);
+            newRole.TipoRole = tipoRole;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteRoleAsync(int idRole)
+        {
+            Role role = await
+                this.FindRoleAsync(idRole);
+            this.context.Roles.Remove(role);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region TECNOLOGIAS
+
+        public async Task<List<Tecnologia>> GetTecnologiasAsync()
+        {
+            return await this.context.Tecnologias.ToListAsync();
+        }
+
+        public async Task<Tecnologia>
+            FindTecnologiaAsync(int id)
+        {
+            return await
+                this.context.Tecnologias
+                .FirstOrDefaultAsync(x => x.IdTecnologia == id);
+        }
+
+        private async Task<int> GetMaxTecnologia()
+        {
+            if (this.context.Tecnologias.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.Tecnologias.MaxAsync
+                    (z => z.IdTecnologia) + 1;
+            }
+        }
+
+        public async Task<Tecnologia> InsertTecnologiaAsync
+            (Tecnologia requestTecnologia)
+        {
+            Tecnologia newTecnologia = new Tecnologia();
+            newTecnologia.IdTecnologia =
+                await this.GetMaxTecnologia();
+            newTecnologia.IdTipoTecnologia = requestTecnologia.IdTipoTecnologia;
+            newTecnologia.NombreTecnologia = requestTecnologia.NombreTecnologia;
+            this.context.Tecnologias.Add(newTecnologia);
+            await this.context.SaveChangesAsync();
+            return newTecnologia;
+        }
+
+        public async Task UpdateTecnologiaAsync
+           (Tecnologia requestTecnologia)
+        {
+            Tecnologia newTecnologia = await
+                this.FindTecnologiaAsync
+                (requestTecnologia.IdTecnologia);
+            newTecnologia.IdTipoTecnologia = requestTecnologia.IdTipoTecnologia;
+            newTecnologia.NombreTecnologia = requestTecnologia.NombreTecnologia;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTecnologiaAsync(int idTecnologia)
+        {
+            Tecnologia tecno = await
+                this.FindTecnologiaAsync(idTecnologia);
+            this.context.Tecnologias.Remove(tecno);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
     }
 }
