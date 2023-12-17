@@ -7,8 +7,8 @@ namespace ApiTechRiders.Models
     public class PeticionCentroEmpresa
     {
         [Key]
-        [Column("IDPETICION")]
-        public int IdPeticion { get; set; }
+        [Column("IDPETICIONCENTROEMPRESA")]
+        public int IdPeticionCentroEmpresa { get; set; }
         [Column("IDCENTROEMPRESA")]
         public int IdCentroEmpresa { get; set; }
     }

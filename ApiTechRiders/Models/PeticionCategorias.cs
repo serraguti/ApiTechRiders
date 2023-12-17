@@ -7,8 +7,8 @@ namespace ApiTechRiders.Models
     public class PeticionCategorias
     {
         [Key]
-        [Column("IDPETICION")]
-        public int IdPeticion { get; set; }
+        [Column("IDPETICIONCATEGORIAS")]
+        public int IdPeticionCategorias { get; set; }
         [Column("CATEGORIA")]
         public string Categoria { get; set; }
     }

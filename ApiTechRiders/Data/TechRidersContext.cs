@@ -17,7 +17,7 @@ namespace ApiTechRiders.Data
         public DbSet<PeticionAltaUsers> PeticionesAltaUsers { get; set; }
         public DbSet<PeticionCategorias> PeticionesCategorias { get; set; }
         public DbSet<PeticionCentroEmpresa> PeticionesCentroEmpresa { get; set; }
-        public DbSet<PeticionCharlas> PeticionesCharlas { get; set; }
+        public DbSet<PeticionCharla> PeticionesCharlas { get; set; }
         public DbSet<Provincia> Provincias { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Tecnologia> Tecnologias { get; set; }
