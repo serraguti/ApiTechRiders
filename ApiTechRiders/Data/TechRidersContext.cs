@@ -27,5 +27,7 @@ namespace ApiTechRiders.Data
         public DbSet<Usuario> Usuarios { get;set; }
         public DbSet<ValoracionCharla> ValoracionesCharlas { get; set; }
 
+        public DbSet<TipoEmpresa> TiposEmpresas { get; set; }
+
     }
 }

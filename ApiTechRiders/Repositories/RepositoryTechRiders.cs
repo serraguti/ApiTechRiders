@@ -899,5 +899,124 @@ namespace ApiTechRiders.Repositories
         }
 
         #endregion
+
+        #region TECNOLOGIAS TECHRIDERS
+
+        public async Task<List<TecnologiaTechRiders>> GetTecnologiasTechRidersAsync()
+        {
+            return await this.context.TecnologiasTechRiders.ToListAsync();
+        }
+
+        public async Task<TecnologiaTechRiders> 
+            FindTecnologiasTechRidersAsync
+            (int idTechRider, int idTecnologia)
+        {
+            return await this.context.TecnologiasTechRiders
+                .FirstOrDefaultAsync(z => z.IdUsuario == idTechRider
+                && z.IdTecnologia == idTechRider);
+        }
+
+        public async Task<List<TecnologiaTechRiders>>
+            GetTecnologiasTechRidersAsync(int idTechRider)
+        {
+            return await this.context.TecnologiasTechRiders
+                .Where(z => z.IdUsuario == idTechRider)
+                .ToListAsync();
+        }
+
+        public async Task<TecnologiaTechRiders> InsertTecnologiaTechRiderAsync
+            (int idTechRider, int idTecnologia)
+        {
+            TecnologiaTechRiders newTecnologiaTechRiders = new TecnologiaTechRiders();
+            newTecnologiaTechRiders.IdUsuario = idTechRider;
+            newTecnologiaTechRiders.IdTecnologia = idTecnologia;
+            this.context.TecnologiasTechRiders.Add(newTecnologiaTechRiders);
+            await this.context.SaveChangesAsync();
+            return newTecnologiaTechRiders;
+        }
+
+        public async Task 
+            UpdateTecnologiaTechRiderAsync
+             (int idTechRider, int idTecnologia)
+        {
+            TecnologiaTechRiders newTecnologiaTechRiders =
+                await
+                this.FindTecnologiasTechRidersAsync(idTechRider, idTecnologia);
+            newTecnologiaTechRiders.IdTecnologia = idTecnologia;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTecnologiaTechRidersAsync
+             (int idTechRider, int idTecnologia)
+        {
+            TecnologiaTechRiders newTecnologiaTechRiders =
+                await
+                this.FindTecnologiasTechRidersAsync(idTechRider, idTecnologia);
+            this.context.TecnologiasTechRiders.Remove(newTecnologiaTechRiders);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region TIPO EMPRESA
+
+        public async Task<List<TipoEmpresa>> GetTipoEmpresaAsync()
+        {
+            return await this.context.TiposEmpresas.ToListAsync();
+        }
+
+        public async Task<TipoEmpresa>
+            FindTipoEmpresaAsync(int id)
+        {
+            return await
+                this.context.TiposEmpresas
+                .FirstOrDefaultAsync(x => x.IdTipoEmpresa == id);
+        }
+
+        private async Task<int> GetMaxTipoEmpresa()
+        {
+            if (this.context.TiposEmpresas.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.TiposEmpresas.MaxAsync
+                    (z => z.IdTipoEmpresa) + 1;
+            }
+        }
+
+        public async Task<TipoEmpresa> InsertTipoEmpresaAsync
+            (TipoEmpresa requestTipoEmpresa)
+        {
+            TipoEmpresa newTipoEmpresa = new TipoEmpresa();
+            newTipoEmpresa.IdTipoEmpresa =
+                await this.GetMaxTipoEmpresa();
+            newTipoEmpresa.Descripcion = requestTipoEmpresa.Descripcion;
+            this.context.TiposEmpresas.Add(newTipoEmpresa);
+            await this.context.SaveChangesAsync();
+            return newTipoEmpresa;
+        }
+
+        public async Task UpdateTipoEmpresaAsync
+                (TipoEmpresa requestTipoEmpresa)
+        {
+            TipoEmpresa newTipoEmpresa = await
+                this.FindTipoEmpresaAsync(requestTipoEmpresa.IdTipoEmpresa);
+            newTipoEmpresa.Descripcion = requestTipoEmpresa.Descripcion;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTipoEmpresaAsync
+                (int idTipoEmpresa)
+        {
+            TipoEmpresa newTipoEmpresa = await
+                this.FindTipoEmpresaAsync(idTipoEmpresa);
+            this.context.TiposEmpresas.Remove(newTipoEmpresa);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
     }
 }
