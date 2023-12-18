@@ -7,6 +7,7 @@ namespace ApiTechRiders.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class TipoEmpresaController : ControllerBase
     {
         private RepositoryTechRiders repo;

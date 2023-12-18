@@ -65,7 +65,7 @@ app.UseSwaggerUI(options =>
     options.InjectStylesheet("/css/bootstrap.css");
     options.InjectStylesheet("/css/material3x.css");
     options.SwaggerEndpoint(
-        url: "/swagger/v1/swagger.json", name: "Api ejemplos Azure");
+        url: "/swagger/v1/swagger.json", name: "Api TechRiders Proyecto");
     options.RoutePrefix = "";
     options.DocExpansion(DocExpansion.None);
 });

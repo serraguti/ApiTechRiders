@@ -7,6 +7,7 @@ namespace ApiTechRiders.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class TecnologiasTechRidersController : ControllerBase
     {
         private RepositoryTechRiders repo;
@@ -45,10 +46,11 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
-        public async Task<ActionResult<TecnologiaTechRiders>> 
+        [Route("[action]/{idtechrider}/{idtecnologia}")]
+        public async Task<ActionResult<TecnologiaTechRiders>>
             Find(int idtechrider, int idtecnologia)
         {
-            var tecnologiaTechRider = 
+            var tecnologiaTechRider =
                 await this.repo.FindTecnologiasTechRidersAsync(idtechrider, idtecnologia);
             if (tecnologiaTechRider == null)
             {
@@ -83,7 +85,7 @@ namespace ApiTechRiders.Controllers
             return tecnologiasTechRider;
         }
 
-        // POST: api/peticionescharlas
+        // POST: api/tecnologiastechriders
         /// <summary>
         /// Crea un nuevo TECNOLOGIASTECHRIDERS en la BBDD, tabla TECNOLOGIASTECHRIDERS
         /// </summary>
@@ -107,7 +109,7 @@ namespace ApiTechRiders.Controllers
             return peticionNew;
         }
 
-        // PUT: api/peticionescharlas
+        // PUT: api/tecnologiastechriders
         /// <summary>
         /// Modifica un TECNOLOGIASTECHRIDERS en la BBDD mediante su ID, tabla TECNOLOGIASTECHRIDERS
         /// </summary>
@@ -124,7 +126,7 @@ namespace ApiTechRiders.Controllers
                 (int idtechrider, int idtecnologia)
         {
             var peticionFind = await this.repo.FindTecnologiasTechRidersAsync
-                (idtechrider,idtecnologia);
+                (idtechrider, idtecnologia);
             if (peticionFind == null)
             {
                 return NotFound();
@@ -133,7 +135,7 @@ namespace ApiTechRiders.Controllers
             return Ok();
         }
 
-        // DELETE: api/peticionescharlas/{id}
+        // DELETE: api/tecnologiastechriders/{id}
         /// <summary>
         /// Elimina un TECNOLOGIASTECHRIDERS en la BBDD mediante su ID. Tabla TECNOLOGIASTECHRIDERS
         /// </summary>
