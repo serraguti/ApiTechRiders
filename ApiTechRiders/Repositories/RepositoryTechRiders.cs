@@ -3,6 +3,7 @@
 //cambiar IDPETICION POR IdPeticionAltaUsers EN PETCIONALTAUSERS
 //cambiar IDPETICION POR IdPeticionCentrosEmpresa EN PETCIONCENTROSEMPRESA
 //cambiar IDPETICION POR IdPeticionCharla EN PETICIONCHARLA
+//INCLUIR IDCHARLA DENTRO DE VALORACIONES CHARLAS
 
 using ApiTechRiders.Data;
 using ApiTechRiders.Models;
@@ -283,7 +284,7 @@ namespace ApiTechRiders.Repositories
             await this.context.SaveChangesAsync();
         }
 
-        public async Task DeleteCursoAsync(int idEmpresaCentro)
+        public async Task DeleteEmpresasCentrosAsync(int idEmpresaCentro)
         {
             EmpresasCentros newEmpresasCentros =
                 await this.FindEmpresasCentrosAsync(idEmpresaCentro);
@@ -512,18 +513,18 @@ namespace ApiTechRiders.Repositories
 
 
         public async Task<PeticionAltaUsers> InsertPeticionAltaUsersAsync
-            (int idpeticion, int iduser)
+            (int iduser)
         {
-            PeticionAltaUsers newCurso = new PeticionAltaUsers();
-            newCurso.IdPeticionAltaUsers = idpeticion;
-            newCurso.IdUser = iduser;
-            this.context.PeticionesAltaUsers.Add(newCurso);
+            PeticionAltaUsers newPeticion = new PeticionAltaUsers();
+            newPeticion.IdPeticionAltaUsers = await this.GetMaxPeticionAltaUsers();
+            newPeticion.IdUser = iduser;
+            this.context.PeticionesAltaUsers.Add(newPeticion);
             await this.context.SaveChangesAsync();
-            return newCurso;
+            return newPeticion;
         }
 
         public async Task DeletePeticionAltaUsersAsync
-             (int idpeticion, int iduser)
+             (int idpeticion)
         {
             PeticionAltaUsers peticionuser = await
                 this.FindPeticionesAltaUsersAsync(idpeticion);
@@ -563,23 +564,23 @@ namespace ApiTechRiders.Repositories
         }
 
         public async Task<PeticionCategorias> InsertPeticionCategoriasAsync
-            (PeticionCategorias requestPeticionCategorias)
+            (string categoria)
         {
             PeticionCategorias newPeticionCategorias = new PeticionCategorias();
             newPeticionCategorias.IdPeticionCategorias = await this.GetMaxPeticionCategorias();
-            newPeticionCategorias.Categoria = requestPeticionCategorias.Categoria;
+            newPeticionCategorias.Categoria = categoria;
             this.context.PeticionesCategorias.Add(newPeticionCategorias);
             await this.context.SaveChangesAsync();
             return newPeticionCategorias;
         }
 
         public async Task UpdatePeticionCategoriasAsync
-           (PeticionCategorias requestPeticionCategorias)
+           (int idpeticion, string categoria)
         {
             PeticionCategorias newPeticionCategorias = await
                 this.FindPeticionCategoriasAsync
-                (requestPeticionCategorias.IdPeticionCategorias);
-            newPeticionCategorias.Categoria = requestPeticionCategorias.Categoria;
+                (idpeticion);
+            newPeticionCategorias.Categoria = categoria;
             await this.context.SaveChangesAsync();
         }
 
@@ -623,24 +624,24 @@ namespace ApiTechRiders.Repositories
         }
 
         public async Task<PeticionCentroEmpresa> InsertPeticionCentroEmpresaAsync
-            (PeticionCentroEmpresa requestPeticionCentroEmpresa)
+            (int idcentroempresa)
         {
             PeticionCentroEmpresa newPeticionCentroEmpresa = new PeticionCentroEmpresa();
             newPeticionCentroEmpresa.IdPeticionCentroEmpresa = 
                 await this.GetMaxPeticionCentroEmpresa();
-            newPeticionCentroEmpresa.IdCentroEmpresa = requestPeticionCentroEmpresa.IdCentroEmpresa
+            newPeticionCentroEmpresa.IdCentroEmpresa = idcentroempresa;
             this.context.PeticionesCentroEmpresa.Add(newPeticionCentroEmpresa);
             await this.context.SaveChangesAsync();
             return newPeticionCentroEmpresa;
         }
 
         public async Task UpdatePeticionCentroEmpresaAsync
-           (PeticionCentroEmpresa requestPeticionCentroEmpresa)
+           (int idpeticion, int idcentroempresa)
         {
             PeticionCentroEmpresa newPeticionCentroEmpresa = await
                 this.FindPeticionCentroEmpresaAsync
-                (requestPeticionCentroEmpresa.IdPeticionCentroEmpresa);
-            newPeticionCentroEmpresa.IdCentroEmpresa = requestPeticionCentroEmpresa.IdCentroEmpresa;
+                (idpeticion);
+            newPeticionCentroEmpresa.IdCentroEmpresa = idcentroempresa;
             await this.context.SaveChangesAsync();
         }
 
@@ -684,24 +685,24 @@ namespace ApiTechRiders.Repositories
         }
 
         public async Task<PeticionCharla> InsertPeticionCharlaAsync
-            (PeticionCharla requestPeticionCharla)
+            (int idcharla)
         {
             PeticionCharla newPeticionCharla = new PeticionCharla();
             newPeticionCharla.IdPeticionCharla =
                 await this.GetMaxPeticionCharla();
-            newPeticionCharla.IdCharla = requestPeticionCharla.IdCharla;
+            newPeticionCharla.IdCharla = idcharla;
             this.context.PeticionesCharlas.Add(newPeticionCharla);
             await this.context.SaveChangesAsync();
             return newPeticionCharla;
         }
 
         public async Task UpdatePeticionCharlaAsync
-           (PeticionCharla requestPeticionCharla)
+           (int idpeticioncharla, int idcharla)
         {
             PeticionCharla newPeticionCharla = await
                 this.FindPeticionCharlaAsync
-                (requestPeticionCharla.IdPeticionCharla);
-            newPeticionCharla.IdCharla = requestPeticionCharla.IdCharla;
+                (idpeticioncharla);
+            newPeticionCharla.IdCharla = idcharla;
             await this.context.SaveChangesAsync();
         }
 
@@ -745,12 +746,12 @@ namespace ApiTechRiders.Repositories
         }
 
         public async Task<Provincia> InsertProvinciaAsync
-            (Provincia requestProvincia)
+            (string nombreProvincia)
         {
             Provincia newProvincia = new Provincia();
             newProvincia.IdProvincia =
                 await this.GetMaxProvincia();
-            newProvincia.NombreProvincia = requestProvincia.NombreProvincia;
+            newProvincia.NombreProvincia = nombreProvincia;
             this.context.Provincias.Add(newProvincia);
             await this.context.SaveChangesAsync();
             return newProvincia;
@@ -988,23 +989,23 @@ namespace ApiTechRiders.Repositories
         }
 
         public async Task<TipoEmpresa> InsertTipoEmpresaAsync
-            (TipoEmpresa requestTipoEmpresa)
+            (string descripcion)
         {
             TipoEmpresa newTipoEmpresa = new TipoEmpresa();
             newTipoEmpresa.IdTipoEmpresa =
                 await this.GetMaxTipoEmpresa();
-            newTipoEmpresa.Descripcion = requestTipoEmpresa.Descripcion;
+            newTipoEmpresa.Descripcion = descripcion;
             this.context.TiposEmpresas.Add(newTipoEmpresa);
             await this.context.SaveChangesAsync();
             return newTipoEmpresa;
         }
 
         public async Task UpdateTipoEmpresaAsync
-                (TipoEmpresa requestTipoEmpresa)
+                (int idtipoempresa, string descripcion)
         {
             TipoEmpresa newTipoEmpresa = await
-                this.FindTipoEmpresaAsync(requestTipoEmpresa.IdTipoEmpresa);
-            newTipoEmpresa.Descripcion = requestTipoEmpresa.Descripcion;
+                this.FindTipoEmpresaAsync(idtipoempresa);
+            newTipoEmpresa.Descripcion = descripcion;
             await this.context.SaveChangesAsync();
         }
 
@@ -1014,6 +1015,224 @@ namespace ApiTechRiders.Repositories
             TipoEmpresa newTipoEmpresa = await
                 this.FindTipoEmpresaAsync(idTipoEmpresa);
             this.context.TiposEmpresas.Remove(newTipoEmpresa);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region TIPO TECNOLOGIA
+
+        public async Task<List<TipoTecnologia>> GetTipoTecnologiaAsync()
+        {
+            return await this.context.TiposTecnologias.ToListAsync();
+        }
+
+        public async Task<TipoTecnologia>
+            FindTipoTecnologiaAsync(int id)
+        {
+            return await
+                this.context.TiposTecnologias
+                .FirstOrDefaultAsync(x => x.IdTipoTecnologia == id);
+        }
+
+        private async Task<int> GetMaxTipoTecnologia()
+        {
+            if (this.context.TiposTecnologias.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.TiposTecnologias.MaxAsync
+                    (z => z.IdTipoTecnologia) + 1;
+            }
+        }
+
+        public async Task<TipoTecnologia> InsertTipoTecnologiaAsync
+            (string descripcion)
+        {
+            TipoTecnologia newTipoTecnologia = new TipoTecnologia();
+            newTipoTecnologia.IdTipoTecnologia =
+                await this.GetMaxTipoTecnologia();
+            newTipoTecnologia.Descripcion = descripcion;
+            this.context.TiposTecnologias.Add(newTipoTecnologia);
+            await this.context.SaveChangesAsync();
+            return newTipoTecnologia;
+        }
+
+        public async Task UpdateTipoTecnologiaAsync
+                (int idTipoTecnologia, string descripcion)
+        {
+            TipoTecnologia newTipoTecnologia = await
+                this.FindTipoTecnologiaAsync(idTipoTecnologia);
+            newTipoTecnologia.Descripcion = descripcion;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTipoTecnologiaAsync
+                (int idTipoTecnologia)
+        {
+            TipoTecnologia newTipoTecnologia = await
+                this.FindTipoTecnologiaAsync(idTipoTecnologia);
+            this.context.TiposTecnologias.Remove(newTipoTecnologia);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region USUARIOS
+
+        public async Task<List<Usuario>> GetUsuarioAsync()
+        {
+            return await this.context.Usuarios.ToListAsync();
+        }
+
+        public async Task<Usuario>
+            FindUsuarioAsync(int id)
+        {
+            return await
+                this.context.Usuarios
+                .FirstOrDefaultAsync(x => x.IdUsuario == id);
+        }
+
+        public async Task<Usuario>
+            FindUsuarioPasswordAsync(string email, string password)
+        {
+            return await
+                this.context.Usuarios
+                .FirstOrDefaultAsync(x => x.Email == email && 
+                x.Password == password);
+        }
+
+        private async Task<int> GetMaxIdUsuario()
+        {
+            if (this.context.Usuarios.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.Usuarios.MaxAsync(z => z.IdUsuario) + 1;
+            }
+        }
+
+        public async Task<Usuario> InsertUsuarioAsync
+            (Usuario requestUsuario)
+        {
+            Usuario newUsuario = new Usuario();
+            newUsuario.IdUsuario = await this.GetMaxIdUsuario();
+            newUsuario.IdEmpresaCentro = requestUsuario.IdEmpresaCentro;
+            newUsuario.IdProvincia = requestUsuario.IdProvincia;
+            newUsuario.IdRole = requestUsuario.IdRole;
+            newUsuario.LinkedIn = requestUsuario.LinkedIn;
+            newUsuario.Nombre = requestUsuario.Nombre;
+            newUsuario.Password = requestUsuario.Password;
+            newUsuario.Telefono = requestUsuario.Telefono;
+            newUsuario.Estado = requestUsuario.Estado;
+            newUsuario.Apellidos = requestUsuario.Apellidos;
+            newUsuario.Email = requestUsuario.Email;
+            this.context.Usuarios.Add(newUsuario);
+            await this.context.SaveChangesAsync();
+            return newUsuario;
+        }
+
+        public async Task UpdateUsuarioAsync
+            (Usuario requestUsuario)
+        {
+            Usuario newUsuario = await
+                this.FindUsuarioAsync(requestUsuario.IdUsuario);
+            newUsuario.IdEmpresaCentro = requestUsuario.IdEmpresaCentro;
+            newUsuario.IdProvincia = requestUsuario.IdProvincia;
+            newUsuario.IdRole = requestUsuario.IdRole;
+            newUsuario.LinkedIn = requestUsuario.LinkedIn;
+            newUsuario.Nombre = requestUsuario.Nombre;
+            newUsuario.Password = requestUsuario.Password;
+            newUsuario.Telefono = requestUsuario.Telefono;
+            newUsuario.Estado = requestUsuario.Estado;
+            newUsuario.Apellidos = requestUsuario.Apellidos;
+            newUsuario.Email = requestUsuario.Email;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteUsuarioAsync(int idUsuario)
+        {
+            Usuario user = await this.FindUsuarioAsync(idUsuario);
+            this.context.Usuarios.Remove(user);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region VALORACION CHARLAS
+
+        public async Task<List<ValoracionCharla>> GetValoracionesCharlasAsync()
+        {
+            return await this.context.ValoracionesCharlas.ToListAsync();
+        }
+
+        public async Task<ValoracionCharla>
+            FindValoracionCharlaAsync(int id)
+        {
+            return await
+                this.context.ValoracionesCharlas
+                .FirstOrDefaultAsync(x => x.IdValoracion == id);
+        }
+
+        public async Task<List<ValoracionCharla>>
+            GetValoracionesCharlaAsync(int idcharla)
+        {
+            return await
+                this.context.ValoracionesCharlas
+                .Where(x => x.IdCharla == idcharla).ToListAsync();
+        }
+
+        private async Task<int> GetMaxIdValoracionCharla()
+        {
+            if (this.context.ValoracionesCharlas.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.ValoracionesCharlas.MaxAsync
+                    (z => z.IdValoracion) + 1;
+            }
+        }
+
+        public async Task<ValoracionCharla> InsertValoracionCharlasAsync
+            (ValoracionCharla requestValoracionCharla)
+        {
+            ValoracionCharla newValoracionCharla = new ValoracionCharla();
+            newValoracionCharla.IdValoracion =
+                await this.GetMaxIdValoracionCharla();
+            newValoracionCharla.Comentario = requestValoracionCharla.Comentario;
+            newValoracionCharla.Valoracion = requestValoracionCharla.Valoracion;
+            this.context.ValoracionesCharlas.Add(newValoracionCharla);
+            await this.context.SaveChangesAsync();
+            return newValoracionCharla;
+        }
+
+        public async Task UpdateValoracionCharlasAsync
+            (ValoracionCharla requestValoracionCharla)
+        {
+            ValoracionCharla newValoracionCharla = await
+                this.FindValoracionCharlaAsync(requestValoracionCharla.IdValoracion);
+            newValoracionCharla.IdValoracion =
+                await this.GetMaxIdValoracionCharla();
+            newValoracionCharla.Comentario = requestValoracionCharla.Comentario;
+            newValoracionCharla.Valoracion = requestValoracionCharla.Valoracion;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteValoracionCharlaAsync
+                (int idValoracionCharla)
+        {
+            ValoracionCharla newValoracionCharla = await
+                this.FindValoracionCharlaAsync(idValoracionCharla);
+            this.context.ValoracionesCharlas.Remove(newValoracionCharla);
             await this.context.SaveChangesAsync();
         }
 
