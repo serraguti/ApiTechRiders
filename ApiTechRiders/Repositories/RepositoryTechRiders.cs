@@ -1211,6 +1211,7 @@ namespace ApiTechRiders.Repositories
                 await this.GetMaxIdValoracionCharla();
             newValoracionCharla.Comentario = requestValoracionCharla.Comentario;
             newValoracionCharla.Valoracion = requestValoracionCharla.Valoracion;
+            newValoracionCharla.IdCharla = requestValoracionCharla.IdCharla;
             this.context.ValoracionesCharlas.Add(newValoracionCharla);
             await this.context.SaveChangesAsync();
             return newValoracionCharla;
