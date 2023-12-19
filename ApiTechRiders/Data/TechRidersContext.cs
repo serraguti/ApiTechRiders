@@ -7,6 +7,18 @@ namespace ApiTechRiders.Data
     public class TechRidersContext: DbContext
     {
         public TechRidersContext(DbContextOptions<TechRidersContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CursosProfesores>()
+                .HasKey(x => new { x.IdCurso, x.IdProfesor });
+            modelBuilder.Entity<TecnologiaCharlas>()
+                .HasKey(x => new { x.IdCharla, x.IdTecnologia });
+            modelBuilder.Entity<TecnologiaTechRiders>()
+                .HasKey(x => new { x.IdUsuario, x.IdTecnologia });
+        }
+
         public DbSet<Charla> Charlas { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<CursosProfesores> CursosProfesores { get; set; }

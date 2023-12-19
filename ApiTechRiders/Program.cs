@@ -8,8 +8,12 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using ApiTechRiders.Helpers;
 using ApiTechRiders.Repositories;
 using ApiTechRiders.Data;
+using Hellang.Middleware.ProblemDetails;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//ENABLE PROBLEM DETAILS
+builder.Services.AddProblemDetails();
 
 // Add services to the container.
 string connectionString =
@@ -53,7 +57,7 @@ builder.Services.AddControllers();
 
 
 var app = builder.Build();
-
+app.UseProblemDetails();
 app.UseOpenApi();
 
 if (app.Environment.IsDevelopment())
