@@ -1,5 +1,6 @@
 ﻿using ApiTechRiders.Models;
 using ApiTechRiders.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,7 +1,10 @@
 ﻿using ApiTechRiders.Models;
 using ApiTechRiders.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace ApiTechRiders.Controllers
 {
@@ -123,6 +126,18 @@ namespace ApiTechRiders.Controllers
             }
             await this.repo.DeleteUsuarioAsync(id);
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<Usuario> PerfilUsuario()
+        {
+            Claim claimUser = HttpContext.User.Claims
+                .SingleOrDefault(x => x.Type == "UserData");
+            string jsonUser = claimUser.Value;
+            Usuario user = JsonConvert.DeserializeObject<Usuario>(jsonUser);
+            return user;
         }
     }
 }
