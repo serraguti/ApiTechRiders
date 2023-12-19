@@ -10,6 +10,6 @@ namespace ApiTechRiders.Models
         [Column("IDPROVINCIA")]
         public int IdProvincia { get; set; }
         [Column("PROVINCIA")]
-        public string NombreProvincia { get; set; }
+        public string NombreProvincia { get; set; } = null!;
     }
 }

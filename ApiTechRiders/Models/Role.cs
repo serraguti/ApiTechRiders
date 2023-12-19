@@ -10,6 +10,6 @@ namespace ApiTechRiders.Models
         [Column("IDROLE")]
         public int IdRole { get; set; }
         [Column("TIPO_ROLE")]
-        public string TipoRole { get; set; }
+        public string TipoRole { get; set; } = null!;
     }
 }

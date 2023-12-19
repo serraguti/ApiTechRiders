@@ -15,19 +15,19 @@ namespace ApiTechRiders.Models
         [Column("APELLIDOS")]
         public string Apellidos { get;set; }
         [Column("CORREO")]
-        public string Email { get; set;  }
+        public string Email { get; set;  } = null!;
         [Column("TELEFONO")]
-        public string Telefono { get;set; }
+        public string Telefono { get;set; } = null!;
         [Column("LINKEDIN")]
-        public string LinkedIn { get; set; }
-        [Column("PASSWORD")]
+        public string LinkedIn { get; set; } = null!;
+        [Column("PASS")]
         public string Password { get; set; }
         [Column("IDROLE")]
         public int IdRole { get; set; }
         [Column("IDPROVINCIA")]
         public int IdProvincia { get; set; }
         [Column("IDEMPRESASCENTROS")]
-        public int IdEmpresaCentro { get; set; }
+        public int? IdEmpresaCentro { get; set; } = null!;
         [Column("ESTADO")]
         public int Estado { get;set; }
     }

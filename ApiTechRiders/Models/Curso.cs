@@ -12,8 +12,8 @@ namespace ApiTechRiders.Models
         [Column("IDCENTRO")]
         public int IdCentro { get; set; }
         [Column("NOMBRE_CURSO")]
-        public string NombreCurso { get; set; }
+        public string NombreCurso { get; set; } = null!;
         [Column("DESCRIPCION")]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = null!;
     }
 }

@@ -12,18 +12,18 @@ namespace ApiTechRiders.Models
         [Column("NOMBRE")]
         public string Nombre { get; set; }
         [Column("DIRECCION")]
-        public string Direccion { get; set; }
+        public string Direccion { get; set; } = null!;
         [Column("TELEFONO")]
-        public string Telefono { get; set; }    
+        public string Telefono { get; set; } = null!;
         [Column("PERSONA_CONTACTO")]
-        public string PersonaContacto { get; set; }
+        public string PersonaContacto { get; set; } = null!;
         [Column("CIF")]
-        public string Cif { get; set; }
+        public string Cif { get; set; } = null!;
         [Column("IDPROVINCIA")]
         public int IdProvincia { get; set; }
         [Column("RAZON_SOCIAL_EMPRESA")]
-        public string RazonSocial { get; set; }
+        public string RazonSocial { get; set; } = null!;
         [Column("IDTIPOEMPRESA")]
-        public int IdTipoEmpresa { get; set; }
+        public int? IdTipoEmpresa { get; set; } = null!;
     }
 }

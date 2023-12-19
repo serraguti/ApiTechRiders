@@ -10,8 +10,8 @@ namespace ApiTechRiders.Models
         [Column("IDTECNOLOGIA")]
         public int IdTecnologia { get;set; }
         [Column("NOMBRE_TECNOLOGIA")]
-        public string NombreTecnologia { get; set; }
+        public string NombreTecnologia { get; set; } = null!;
         [Column("ID_TIPO_TECNOLOGIA")]
-        public int IdTipoTecnologia { get; set; }
+        public int? IdTipoTecnologia { get; set; } = null!;
     }
 }

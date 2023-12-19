@@ -8,8 +8,8 @@ namespace ApiTechRiders.Models
     {
         [Key]
         [Column("IDESTADOSCHARLA")]
-        public int IdEstadosCharla { get; set; }
+        public int IdEstadosCharla { get; set; } 
         [Column("TIPO")]
-        public string Tipo { get; set; }
+        public string Tipo { get; set; } = null!;
     }
 }
