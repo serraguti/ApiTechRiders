@@ -18,7 +18,7 @@ namespace ApiTechRiders.Models
         [Column("OBSERVACIONES")]
         public string Observaciones { get;set; } = null!;
         [Column("IDTECHRIDER")]
-        public int IdTechRider { get; set; }
+        public int? IdTechRider { get; set; } = null!;
         [Column("FECHA_SOLICITUD")]
         public DateTime? FechaSolicitud { get; set; } = null!;
         [Column("TURNO")]

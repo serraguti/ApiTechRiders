@@ -1,4 +1,5 @@
-﻿//eliminar PETICIONES
+﻿//PEDIR TECNOLOGIAS INCLUIR DENTRO DEL SCRIPT EL VALOR
+//eliminar PETICIONES
 //CAMBIAR TABLA PETICIONES_CATEGORIAS POR OTRO NOMBRE MAS INTUITIVO
 //INCLUIR IDCATEGORIAPETICION EN LAS TABLAS DE PETICION
 //REALIZAR LAS FOREIGN KEY
@@ -418,64 +419,64 @@ namespace ApiTechRiders.Repositories
 
         #region PETICIONES
 
-        public async Task<List<Peticion>> GetPeticionesAsync()
-        {
-            return await this.context.Peticiones.ToListAsync();
-        }
+        //public async Task<List<Peticion>> GetPeticionesAsync()
+        //{
+        //    return await this.context.Peticiones.ToListAsync();
+        //}
 
-        public async Task<Peticion>
-            FindPeticionAsync(int id)
-        {
-            return await
-                this.context.Peticiones
-                .FirstOrDefaultAsync(x => x.IdPeticion == id);
-        }
+        //public async Task<Peticion>
+        //    FindPeticionAsync(int id)
+        //{
+        //    return await
+        //        this.context.Peticiones
+        //        .FirstOrDefaultAsync(x => x.IdPeticion == id);
+        //}
 
-        private async Task<int> GetMaxPeticion()
-        {
-            if (this.context.Peticiones.Count() == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return await
-                    this.context.Peticiones.MaxAsync(z => z.IdPeticion) + 1;
-            }
-        }
+        //private async Task<int> GetMaxPeticion()
+        //{
+        //    if (this.context.Peticiones.Count() == 0)
+        //    {
+        //        return 1;
+        //    }
+        //    else
+        //    {
+        //        return await
+        //            this.context.Peticiones.MaxAsync(z => z.IdPeticion) + 1;
+        //    }
+        //}
 
-        public async Task<Peticion> InsertPeticionAsync
-            (Peticion requestPeticion)
-        {
-            Peticion newPeticion = new Peticion();
-            newPeticion.IdPeticion = await this.GetMaxPeticion();
-            newPeticion.IdGeneral = requestPeticion.IdGeneral;
-            newPeticion.FechaPeticion = requestPeticion.FechaPeticion;
-            newPeticion.Descripcion = requestPeticion.Descripcion;
-            newPeticion.TipoPeticion = requestPeticion.TipoPeticion;
-            this.context.Peticiones.Add(newPeticion);
-            await this.context.SaveChangesAsync();
-            return newPeticion;
-        }
+        //public async Task<Peticion> InsertPeticionAsync
+        //    (Peticion requestPeticion)
+        //{
+        //    Peticion newPeticion = new Peticion();
+        //    newPeticion.IdPeticion = await this.GetMaxPeticion();
+        //    newPeticion.IdGeneral = requestPeticion.IdGeneral;
+        //    newPeticion.FechaPeticion = requestPeticion.FechaPeticion;
+        //    newPeticion.Descripcion = requestPeticion.Descripcion;
+        //    newPeticion.TipoPeticion = requestPeticion.TipoPeticion;
+        //    this.context.Peticiones.Add(newPeticion);
+        //    await this.context.SaveChangesAsync();
+        //    return newPeticion;
+        //}
 
-        public async Task UpdatePeticionAsync
-            (Peticion requestPeticion)
-        {
-            Peticion newPeticion = await this.FindPeticionAsync(requestPeticion.IdPeticion);
-            newPeticion.IdGeneral = requestPeticion.IdGeneral;
-            newPeticion.FechaPeticion = requestPeticion.FechaPeticion;
-            newPeticion.Descripcion = requestPeticion.Descripcion;
-            newPeticion.TipoPeticion = requestPeticion.TipoPeticion;
-            await this.context.SaveChangesAsync();
-        }
+        //public async Task UpdatePeticionAsync
+        //    (Peticion requestPeticion)
+        //{
+        //    Peticion newPeticion = await this.FindPeticionAsync(requestPeticion.IdPeticion);
+        //    newPeticion.IdGeneral = requestPeticion.IdGeneral;
+        //    newPeticion.FechaPeticion = requestPeticion.FechaPeticion;
+        //    newPeticion.Descripcion = requestPeticion.Descripcion;
+        //    newPeticion.TipoPeticion = requestPeticion.TipoPeticion;
+        //    await this.context.SaveChangesAsync();
+        //}
 
-        public async Task DeletePeticionAsync(int idPeticion)
-        {
-            Peticion peticion = await
-                this.FindPeticionAsync(idPeticion);
-            this.context.Peticiones.Remove(peticion);
-            await this.context.SaveChangesAsync();
-        }
+        //public async Task DeletePeticionAsync(int idPeticion)
+        //{
+        //    Peticion peticion = await
+        //        this.FindPeticionAsync(idPeticion);
+        //    this.context.Peticiones.Remove(peticion);
+        //    await this.context.SaveChangesAsync();
+        //}
 
         #endregion
 
@@ -542,61 +543,61 @@ namespace ApiTechRiders.Repositories
 
         #region PETICIONES CATEGORIAS
 
-        public async Task<List<PeticionCategorias>> GetPeticionCategoriasAsync()
-        {
-            return await this.context.PeticionesCategorias.ToListAsync();
-        }
+        //public async Task<List<PeticionCategorias>> GetPeticionCategoriasAsync()
+        //{
+        //    return await this.context.PeticionesCategorias.ToListAsync();
+        //}
 
-        public async Task<PeticionCategorias>
-            FindPeticionCategoriasAsync(int id)
-        {
-            return await
-                this.context.PeticionesCategorias
-                .FirstOrDefaultAsync(x => x.IdPeticionCategorias == id);
-        }
+        //public async Task<PeticionCategorias>
+        //    FindPeticionCategoriasAsync(int id)
+        //{
+        //    return await
+        //        this.context.PeticionesCategorias
+        //        .FirstOrDefaultAsync(x => x.IdPeticionCategorias == id);
+        //}
 
-        private async Task<int> GetMaxPeticionCategorias()
-        {
-            if (this.context.PeticionesCategorias.Count() == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return await
-                    this.context.PeticionesCategorias.MaxAsync
-                    (z => z.IdPeticionCategorias) + 1;
-            }
-        }
+        //private async Task<int> GetMaxPeticionCategorias()
+        //{
+        //    if (this.context.PeticionesCategorias.Count() == 0)
+        //    {
+        //        return 1;
+        //    }
+        //    else
+        //    {
+        //        return await
+        //            this.context.PeticionesCategorias.MaxAsync
+        //            (z => z.IdPeticionCategorias) + 1;
+        //    }
+        //}
 
-        public async Task<PeticionCategorias> InsertPeticionCategoriasAsync
-            (string categoria)
-        {
-            PeticionCategorias newPeticionCategorias = new PeticionCategorias();
-            newPeticionCategorias.IdPeticionCategorias = await this.GetMaxPeticionCategorias();
-            newPeticionCategorias.Categoria = categoria;
-            this.context.PeticionesCategorias.Add(newPeticionCategorias);
-            await this.context.SaveChangesAsync();
-            return newPeticionCategorias;
-        }
+        //public async Task<PeticionCategorias> InsertPeticionCategoriasAsync
+        //    (string categoria)
+        //{
+        //    PeticionCategorias newPeticionCategorias = new PeticionCategorias();
+        //    newPeticionCategorias.IdPeticionCategorias = await this.GetMaxPeticionCategorias();
+        //    newPeticionCategorias.Categoria = categoria;
+        //    this.context.PeticionesCategorias.Add(newPeticionCategorias);
+        //    await this.context.SaveChangesAsync();
+        //    return newPeticionCategorias;
+        //}
 
-        public async Task UpdatePeticionCategoriasAsync
-           (int idpeticion, string categoria)
-        {
-            PeticionCategorias newPeticionCategorias = await
-                this.FindPeticionCategoriasAsync
-                (idpeticion);
-            newPeticionCategorias.Categoria = categoria;
-            await this.context.SaveChangesAsync();
-        }
+        //public async Task UpdatePeticionCategoriasAsync
+        //   (int idpeticion, string categoria)
+        //{
+        //    PeticionCategorias newPeticionCategorias = await
+        //        this.FindPeticionCategoriasAsync
+        //        (idpeticion);
+        //    newPeticionCategorias.Categoria = categoria;
+        //    await this.context.SaveChangesAsync();
+        //}
 
-        public async Task DeletePeticionCategoriasAsync(int idnewPeticionCategorias)
-        {
-            PeticionCategorias peticionCategorias = await
-                this.FindPeticionCategoriasAsync(idnewPeticionCategorias);
-            this.context.PeticionesCategorias.Remove(peticionCategorias);
-            await this.context.SaveChangesAsync();
-        }
+        //public async Task DeletePeticionCategoriasAsync(int idnewPeticionCategorias)
+        //{
+        //    PeticionCategorias peticionCategorias = await
+        //        this.FindPeticionCategoriasAsync(idnewPeticionCategorias);
+        //    this.context.PeticionesCategorias.Remove(peticionCategorias);
+        //    await this.context.SaveChangesAsync();
+        //}
 
         #endregion
 
@@ -717,6 +718,69 @@ namespace ApiTechRiders.Repositories
             PeticionCharla peticionCharla = await
                 this.FindPeticionCharlaAsync(idPeticionCharla);
             this.context.PeticionesCharlas.Remove(peticionCharla);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region PETICIONES TECNOLOGIAS
+        
+        public async Task<List<PeticionTecnologia>> GetPeticionTecnologiasAsync()
+        {
+            return await this.context.PeticionesTecnologias.ToListAsync();
+        }
+
+        public async Task<PeticionTecnologia>
+            FindPeticionTecnologiasAsync(int id)
+        {
+            return await
+                this.context.PeticionesTecnologias
+                .FirstOrDefaultAsync(x => x.IdPeticionTecnologia == id);
+        }
+
+        private async Task<int> GetMaxIdPeticionTecnologia()
+        {
+            if (this.context.PeticionesTecnologias.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.PeticionesTecnologias.MaxAsync
+                    (z => z.IdPeticionTecnologia) + 1;
+            }
+        }
+
+        public async Task<PeticionTecnologia> InsertPeticionTecnologiaAsync
+            (string tecnologia, int idtipopeticioncategoria)
+        {
+            PeticionTecnologia newPeticionTecnologia = new PeticionTecnologia();
+            newPeticionTecnologia.IdPeticionTecnologia = 
+                await this.GetMaxIdPeticionTecnologia();
+            newPeticionTecnologia.NombreTecnologia = tecnologia;
+            newPeticionTecnologia.IdTipoPeticionCategoria = idtipopeticioncategoria;
+            this.context.PeticionesTecnologias.Add(newPeticionTecnologia);
+            await this.context.SaveChangesAsync();
+            return newPeticionTecnologia;
+        }
+
+        public async Task UpdatePeticionTecnologiaAsync
+           (int idpeticiontecnologia,string tecnologia, int idtipopeticioncategoria)
+        {
+            PeticionTecnologia newPeticionTecnologia = await
+                this.FindPeticionTecnologiasAsync
+                (idpeticiontecnologia);
+            newPeticionTecnologia.NombreTecnologia = tecnologia;
+            newPeticionTecnologia.IdTipoPeticionCategoria = idtipopeticioncategoria;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeletePeticionTecnologiaAsync(int idpeticiontecnologia)
+        {
+            PeticionTecnologia peticionTecnologia = await
+                this.FindPeticionTecnologiasAsync(idpeticiontecnologia);
+            this.context.PeticionesTecnologias.Remove(peticionTecnologia);
             await this.context.SaveChangesAsync();
         }
 
@@ -1240,6 +1304,68 @@ namespace ApiTechRiders.Repositories
             ValoracionCharla newValoracionCharla = await
                 this.FindValoracionCharlaAsync(idValoracionCharla);
             this.context.ValoracionesCharlas.Remove(newValoracionCharla);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region TIPOS PETICION CATEGORIAS
+
+        public async Task<List<TipoPeticionCategoria>> GetTipoPeticionCategoriaAsync()
+        {
+            return await this.context.TiposPeticionesCategorias.ToListAsync();
+        }
+
+        public async Task<TipoPeticionCategoria>
+            FindTipoPeticionCategoriaAsync(int id)
+        {
+            return await
+                this.context.TiposPeticionesCategorias
+                .FirstOrDefaultAsync(x => x.IdTipoPeticionCategoria == id);
+        }
+
+        private async Task<int> GetMaxIdTiposPeticionesCategorias()
+        {
+            if (this.context.TiposPeticionesCategorias.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return await
+                    this.context.TiposPeticionesCategorias.MaxAsync
+                    (z => z.IdTipoPeticionCategoria) + 1;
+            }
+        }
+
+        public async Task<TipoPeticionCategoria> InsertTiposPeticionesCategoriasAsync
+            (string nombrepeticion)
+        {
+            TipoPeticionCategoria newTipoPeticionCategoria = new TipoPeticionCategoria();
+            newTipoPeticionCategoria.IdTipoPeticionCategoria =
+                await this.GetMaxIdPeticionTecnologia();
+            newTipoPeticionCategoria.Categoria = nombrepeticion;
+            this.context.TiposPeticionesCategorias.Add(newTipoPeticionCategoria);
+            await this.context.SaveChangesAsync();
+            return newTipoPeticionCategoria;
+        }
+
+        public async Task UpdateTipoPeticionCategoriaAsync
+           (int idpeticiontecnologia, string nombrepeticion)
+        {
+            TipoPeticionCategoria newTipoPeticionCategoria = await
+                this.FindTipoPeticionCategoriaAsync
+                (idpeticiontecnologia);
+            newTipoPeticionCategoria.Categoria = nombrepeticion;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeleteTipoPeticionCategoriaAsync
+            (int idpeticiontecnologia)
+        {
+            TipoPeticionCategoria tipoPeticionCategoria = await
+                this.FindTipoPeticionCategoriaAsync(idpeticiontecnologia);
+            this.context.TiposPeticionesCategorias.Remove(tipoPeticionCategoria);
             await this.context.SaveChangesAsync();
         }
 

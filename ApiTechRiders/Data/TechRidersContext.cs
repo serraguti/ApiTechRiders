@@ -25,10 +25,11 @@ namespace ApiTechRiders.Data
         public DbSet<EmpresasCentros> EmpresasCentros { get; set; }
         public DbSet<EstadosCharla> EstadosCharlas { get; set; }
         public DbSet<EstadosValidacion> EstadosValidacion { get; set; }
-        public DbSet<Peticion> Peticiones { get; set; }
+        //public DbSet<Peticion> Peticiones { get; set; }
         public DbSet<PeticionAltaUsers> PeticionesAltaUsers { get; set; }
-        public DbSet<PeticionCategorias> PeticionesCategorias { get; set; }
+        //public DbSet<PeticionCategorias> PeticionesCategorias { get; set; }
         public DbSet<PeticionCentroEmpresa> PeticionesCentroEmpresa { get; set; }
+        public DbSet<PeticionTecnologia> PeticionesTecnologias { get; set; }
         public DbSet<PeticionCharla> PeticionesCharlas { get; set; }
         public DbSet<Provincia> Provincias { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -40,6 +41,7 @@ namespace ApiTechRiders.Data
         public DbSet<ValoracionCharla> ValoracionesCharlas { get; set; }
 
         public DbSet<TipoEmpresa> TiposEmpresas { get; set; }
+        public DbSet<TipoPeticionCategoria> TiposPeticionesCategorias { get; set; }
 
     }
 }

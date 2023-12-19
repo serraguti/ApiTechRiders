@@ -11,5 +11,7 @@ namespace ApiTechRiders.Models
         public int IdPeticionCharla { get; set; }
         [Column("IDCHARLA")]
         public int IdCharla { get; set; }
+        [Column("IDTIPOPETICIONCATEGORIA")]
+        public int IdTipoPeticionCategoria { get; set; }
     }
 }
