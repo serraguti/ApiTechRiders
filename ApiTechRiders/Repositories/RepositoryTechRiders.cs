@@ -1,4 +1,9 @@
-﻿//cambiar IDPETICION POR IDPETICION CATEGORIAS TABLA PETICIONES_CATEGORIAS
+﻿//eliminar PETICIONES
+//CAMBIAR TABLA PETICIONES_CATEGORIAS POR OTRO NOMBRE MAS INTUITIVO
+//INCLUIR IDCATEGORIAPETICION EN LAS TABLAS DE PETICION
+//REALIZAR LAS FOREIGN KEY
+
+//cambiar IDPETICION POR IDPETICION CATEGORIAS TABLA PETICIONES_CATEGORIAS
 //CAMBIAR provincia STRING por IDPROVINCIA ALTER TABLE en CHARLAS
 //cambiar IDPETICION POR IdPeticionAltaUsers EN PETCIONALTAUSERS
 //cambiar IDPETICION POR IdPeticionCentrosEmpresa EN PETCIONCENTROSEMPRESA
@@ -915,7 +920,7 @@ namespace ApiTechRiders.Repositories
         {
             return await this.context.TecnologiasTechRiders
                 .FirstOrDefaultAsync(z => z.IdUsuario == idTechRider
-                && z.IdTecnologia == idTechRider);
+                && z.IdTecnologia == idTecnologia);
         }
 
         public async Task<List<TecnologiaTechRiders>>

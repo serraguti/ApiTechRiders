@@ -93,7 +93,7 @@ namespace ApiTechRiders.Controllers
         public async Task<ActionResult> UpdateUsuario
             (Usuario usuarioRequest)
         {
-            var usuarioFind = await this.repo.FindCharlaAsync(usuarioRequest.IdUsuario);
+            var usuarioFind = await this.repo.FindUsuarioAsync(usuarioRequest.IdUsuario);
             if (usuarioFind == null)
             {
                 return NotFound();

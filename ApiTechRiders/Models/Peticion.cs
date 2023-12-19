@@ -16,6 +16,6 @@ namespace ApiTechRiders.Models
         [Column("DESCRIPCION")]
         public string Descripcion { get; set; } = null!;
         [Column("FECHA_PETICION")]
-        public DateTime? FechaPeticion { get;set; } = null!;
+        public DateTime FechaPeticion { get;set; }
     }
 }

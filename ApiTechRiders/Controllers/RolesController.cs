@@ -116,7 +116,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<ActionResult> DeleteRole
             (int idrole)
         {

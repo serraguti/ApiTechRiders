@@ -61,6 +61,7 @@ namespace ApiTechRiders.Controllers
         /// <remarks>
         /// Este método inserta un nuevo PETICIONES enviando el Objeto JSON
         /// El ID se genera automáticamente dentro del método
+        /// FORMATO DE FECHA yyyy-mm-dd
         /// </remarks>
         /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 

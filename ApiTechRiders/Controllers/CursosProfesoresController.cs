@@ -93,8 +93,9 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCursoProfesores(int idcurso, int idprofesor)
+        [HttpDelete]
+        public async Task<ActionResult> DeleteCursoProfesores
+            (int idcurso, int idprofesor)
         {
             var cursoprofesores = 
                 await this.repo.FindCursosProfesoresAsync(idcurso, idprofesor);
