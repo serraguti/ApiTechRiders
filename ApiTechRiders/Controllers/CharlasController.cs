@@ -28,7 +28,6 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<Charla>>> Get()
         {
-            //throw new Exception("Error personalizado con detalles");
             return await this.repo.GetCharlasAsync();
         }
 
