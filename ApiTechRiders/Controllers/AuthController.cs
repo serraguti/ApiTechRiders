@@ -24,6 +24,17 @@ namespace ApiTechRiders.Controllers
             this.helper = helper;
         }
 
+        // POST: api/auth/login
+        /// <summary>
+        /// Obtiene un TOKEN con Email y Password de un Usuario
+        /// </summary>
+        /// <remarks>
+        /// Incluir los siguientes datos: 
+        /// Email: test@gmail.com, Password: 12345
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>        
+        /// <response code="401">NotAuthorized. No autorizado, sin Token válido.</response>         
         [HttpPost]
         [Route("[action]")]
         public async Task<ActionResult> Login(LoginModel model)

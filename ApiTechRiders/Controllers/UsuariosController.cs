@@ -128,6 +128,15 @@ namespace ApiTechRiders.Controllers
             return Ok();
         }
 
+        // GET: api/usuarios/perfilusuario
+        /// <summary>
+        /// Obtiene un USUARIO a partir de su TOKEN, tabla USUARIOS.
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>        
+        /// <response code="401">NotAuthorized. No autorizado, sin Token válido.</response>         
         [Authorize]
         [HttpGet]
         [Route("[action]")]
