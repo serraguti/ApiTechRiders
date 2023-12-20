@@ -148,5 +148,42 @@ namespace ApiTechRiders.Controllers
             Usuario user = JsonConvert.DeserializeObject<Usuario>(jsonUser);
             return user;
         }
+
+        // PUT: api/usuarios/UpdateEstadoUsuario/{idusuario}/{estado}
+        /// <summary>
+        /// Modifica el estado de un usuario de Activo a Inactivo y viceversa. Tabla USUARIOS
+        /// </summary>
+        /// <remarks>
+        /// Debemos enviar el estado ACTIVO con valor 1 o INACTIVO con valor 0
+        /// </remarks>
+        /// <param name="idusuario">ID del USUARIOS a Modificar</param>
+        /// <param name="estado">Estado del Usuario. 0 - INACTIVO, 1 - ACTIVO</param>
+        /// <response code="201">Updated. Objeto modificado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha modificado el objeto en la BD. Error en la BBDD.</response>/// 
+        /// <response code="400">BBDD. Se ha enviado un estado no válido</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut]
+        [Route("[action]/{idusuario}/{estado}")]
+        public async Task<ActionResult> UpdateEstadoUsuario
+            (int idusuario, int estado)
+        {
+            var user = await this.repo.FindUsuarioAsync(idusuario);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            if (estado == 0 || estado == 1) {
+                await this.repo.UpdateEstadoUsuarioAsync(idusuario, estado);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

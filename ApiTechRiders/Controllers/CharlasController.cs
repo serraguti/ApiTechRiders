@@ -127,7 +127,7 @@ namespace ApiTechRiders.Controllers
             return Ok();
         }
 
-        // PUT: api/charlas
+        // PUT: api/charlas/AsociarTechriderCharla/{idtechrider}/{idcharla}
         /// <summary>
         /// Asocia un TechRider a una Charla, tabla CHARLA
         /// </summary>
@@ -151,6 +151,88 @@ namespace ApiTechRiders.Controllers
             }
             await this.repo.UpdateCharlaTechRiderAsync
                 (idtechrider, idcharla);
+            return Ok();
+        }
+
+        // PUT: api/charlas/AsociarTechriderCharla/{idcharla}/{observaciones}
+        /// <summary>
+        /// Modifica las Observaciones de una Charla, Tabla CHARLAS
+        /// </summary>
+        /// <param name="idcharla">ID de la Charla a modificar las Observaciones</param>
+        /// <param name="observaciones">Texto con las observaciones de la Charla</param>
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPut]
+        [Route("[action]/{idcharla}/{observaciones}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateObservacionesCharla
+            (int idcharla, string observaciones)
+        {
+            var charlaFind = await this.repo.FindCharlaAsync(idcharla);
+            if (charlaFind == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdateObservacionesCharlaAsync
+                (idcharla, observaciones);
+            return Ok();
+        }
+
+        // PUT: api/charlas/updateestadocharla//{idcharla}/{idestadocharla}
+        /// <summary>
+        /// Modifica es estado de una Charla, Tabla CHARLAS
+        /// </summary>
+        /// <param name="idcharla">ID de la Charla a cambiar el Estado</param>
+        /// <param name="idestadocharla">ID del estado de la charla</param>
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPut]
+        [Route("[action]/{idcharla}/{idestadocharla}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateEstadoCharla
+            (int idcharla, int idestadocharla)
+        {
+            var charlaFind = await this.repo.FindCharlaAsync(idcharla);
+            if (charlaFind == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdateEstadoCharlaAsync
+                (idcharla, idestadocharla);
+            return Ok();
+        }
+
+        //updatefechacharla//{idcharla}/{fechacharla}
+        // PUT: api/charlas/updatefechacharla//{idcharla}/{fechacharla}
+        /// <summary>
+        /// Modifica la Fecha de una Charla, Tabla CHARLAS
+        /// </summary>
+        /// <param name="idcharla">ID de la Charla a cambiar la Fecha</param>
+        /// <param name="fechacharla">Nueva fecha de la charla (formato yyyy-mm-dd)</param>
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPut]
+        [Route("[action]/{idcharla}/{idestadocharla}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateFechaCharla
+            (int idcharla, DateTime fechacharla)
+        {
+            var charlaFind = await this.repo.FindCharlaAsync(idcharla);
+            if (charlaFind == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdateFechaCharlaAsync
+                (idcharla, fechacharla);
             return Ok();
         }
     }

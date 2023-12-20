@@ -1,4 +1,19 @@
-﻿//PEDIR TECNOLOGIAS INCLUIR DENTRO DEL SCRIPT EL VALOR
+﻿//PONER EN LA DOCUMENTACION QUE CERO QUITARA AL TECHRIDER DE LA CHARLA (PROBAR...)
+//updateobservacionescharla//{idcharla}/{observaciones} (READY)
+//updateestadocharla//{idcharla}/{idestadocharla} (READY)
+//updatefechacharla//{idcharla}/{fechacharla} (READY)
+
+//USUARIOS (READY)
+//	DAR DE ALTA USUARIO (CAMBIAR ESTADO) 
+//	DAR DE BAJA USUARIO (CAMBIAR ESTADO)
+
+//METODO CON TODOS LOS DATOS DE UNA CHARLA
+
+//BUSCAR CHARLAS DE UN TECHRIDER/PROFESOR
+
+//CURSOS POR PROFESOR (VARIOS)
+
+//PEDIR TECNOLOGIAS INCLUIR DENTRO DEL SCRIPT EL VALOR
 //eliminar PETICIONES
 //CAMBIAR TABLA PETICIONES_CATEGORIAS POR OTRO NOMBRE MAS INTUITIVO
 //INCLUIR IDCATEGORIAPETICION EN LAS TABLAS DE PETICION
@@ -111,6 +126,33 @@ namespace ApiTechRiders.Repositories
             Charla newCharla = 
                 await this.FindCharlaAsync(idCharla);
             newCharla.IdTechRider = idTechrider;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateObservacionesCharlaAsync
+            (int idCharla, string observaciones)
+        {
+            Charla newCharla =
+                await this.FindCharlaAsync(idCharla);
+            newCharla.Observaciones = observaciones;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateEstadoCharlaAsync
+            (int idCharla, int idestadocharla)
+        {
+            Charla newCharla =
+                await this.FindCharlaAsync(idCharla);
+            newCharla.IdEstadoCharla = idestadocharla;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateFechaCharlaAsync
+            (int idCharla, DateTime fechacharla)
+        {
+            Charla newCharla =
+                await this.FindCharlaAsync(idCharla);
+            newCharla.FechaCharla = fechacharla;
             await this.context.SaveChangesAsync();
         }
 
@@ -1247,6 +1289,13 @@ namespace ApiTechRiders.Repositories
         {
             Usuario user = await this.FindUsuarioAsync(idUsuario);
             this.context.Usuarios.Remove(user);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateEstadoUsuarioAsync(int idUsuario, int estado)
+        {
+            Usuario user = await this.FindUsuarioAsync(idUsuario);
+            user.Estado = estado;
             await this.context.SaveChangesAsync();
         }
 
