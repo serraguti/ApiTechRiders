@@ -3,6 +3,7 @@ using ApiTechRiders.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 
 namespace ApiTechRiders.Controllers
 {
@@ -123,6 +124,33 @@ namespace ApiTechRiders.Controllers
                 return NotFound();
             }
             await this.repo.DeleteCharlaAsync(id);
+            return Ok();
+        }
+
+        // PUT: api/charlas
+        /// <summary>
+        /// Asocia un TechRider a una Charla, tabla CHARLA
+        /// </summary>
+        /// <param name="idtechrider">ID del TechRider a asociar a una Charla</param>
+        /// <param name="idcharla">ID de la Charla a asociar el TechRider</param>
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPut]
+        [Route("[action]/{idtechrider}/{idcharla}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> AsociarTechriderCharla
+            (int idtechrider, int idcharla)
+        {
+            var charlaFind = await this.repo.FindCharlaAsync(idcharla);
+            if (charlaFind == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdateCharlaTechRiderAsync
+                (idtechrider, idcharla);
             return Ok();
         }
     }

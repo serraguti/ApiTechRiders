@@ -112,7 +112,8 @@ namespace ApiTechRiders.Controllers
             (ValoracionCharla valoracionRequest)
         {
             var valoracionFind = await 
-                this.repo.FindValoracionCharlaAsync(valoracionRequest.IdValoracion);
+                this.repo.FindValoracionCharlaAsync
+                (valoracionRequest.IdValoracion);
             if (valoracionFind == null)
             {
                 return NotFound();

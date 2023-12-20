@@ -76,31 +76,31 @@ namespace ApiTechRiders.Controllers
             return peticionNew;
         }
 
-        // PUT: api/peticionescentroempresa
-        /// <summary>
-        /// Modifica un PETICIONES en la BBDD mediante su ID, tabla PETICIONES
-        /// </summary>
-        /// <param name="idpeticion">Nombre de la categoria de la petición de Alta</param>/// 
-        /// <param name="idcentroempresa">Id del Centro/Empresa para modificar</param>/// 
-        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
-        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
-        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdatePeticionCentroEmpresa
-                (int idpeticion, int idcentroempresa)
-        {
-            var peticionFind = await this.repo.FindPeticionCentroEmpresaAsync
-                (idpeticion);
-            if (peticionFind == null)
-            {
-                return NotFound();
-            }
-            await this.repo.UpdatePeticionCentroEmpresaAsync(idpeticion, idcentroempresa);
-            return Ok();
-        }
+        //// PUT: api/peticionescentroempresa
+        ///// <summary>
+        ///// Modifica un PETICIONES en la BBDD mediante su ID, tabla PETICIONES
+        ///// </summary>
+        ///// <param name="idpeticion">Nombre de la categoria de la petición de Alta</param>/// 
+        ///// <param name="idcentroempresa">Id del Centro/Empresa para modificar</param>/// 
+        ///// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        ///// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        ///// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        //[HttpPut]
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult> UpdatePeticionCentroEmpresa
+        //        (int idpeticion, int idcentroempresa)
+        //{
+        //    var peticionFind = await this.repo.FindPeticionCentroEmpresaAsync
+        //        (idpeticion);
+        //    if (peticionFind == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    await this.repo.UpdatePeticionCentroEmpresaAsync(idpeticion, idcentroempresa);
+        //    return Ok();
+        //}
 
         // DELETE: api/peticionescentroempresa/{id}
         /// <summary>
@@ -116,7 +116,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("{id}")]
+        [HttpDelete]
         public async Task<ActionResult> DeletePeticionCentroEmpresa
             (int idpeticion)
         {

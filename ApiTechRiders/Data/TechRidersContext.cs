@@ -43,5 +43,8 @@ namespace ApiTechRiders.Data
         public DbSet<TipoEmpresa> TiposEmpresas { get; set; }
         public DbSet<TipoPeticionCategoria> TiposPeticionesCategorias { get; set; }
 
+        public DbSet<CharlaView> CharlasView { get; set; }
+        public DbSet<TechRiderTecnologia> TechRiderTecnologias { get; set; }
+
     }
 }

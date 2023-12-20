@@ -67,11 +67,11 @@ namespace ApiTechRiders.Repositories
             newCharla.Modalidad = requestCharla.Modalidad;
             newCharla.Observaciones = requestCharla.Observaciones;
             newCharla.Turno = requestCharla.Turno;
-            newCharla.Valoracion = requestCharla.Valoracion;
+            //newCharla.Valoracion = requestCharla.Valoracion;
             newCharla.FechaCharla = requestCharla.FechaCharla;
             newCharla.FechaSolicitud = requestCharla.FechaSolicitud;
             newCharla.Descripcion = requestCharla.Descripcion;
-            newCharla.Comentarios = requestCharla.Comentarios;
+            //newCharla.Comentarios = requestCharla.Comentarios;
             newCharla.AcreditacionLinkedIn = requestCharla.AcreditacionLinkedIn;
             this.context.Charlas.Add(newCharla);
             await this.context.SaveChangesAsync();
@@ -89,11 +89,11 @@ namespace ApiTechRiders.Repositories
             newCharla.Modalidad = requestCharla.Modalidad;
             newCharla.Observaciones = requestCharla.Observaciones;
             newCharla.Turno = requestCharla.Turno;
-            newCharla.Valoracion = requestCharla.Valoracion;
+            //newCharla.Valoracion = requestCharla.Valoracion;
             newCharla.FechaCharla = requestCharla.FechaCharla;
             newCharla.FechaSolicitud = requestCharla.FechaSolicitud;
             newCharla.Descripcion = requestCharla.Descripcion;
-            newCharla.Comentarios = requestCharla.Comentarios;
+            //newCharla.Comentarios = requestCharla.Comentarios;
             newCharla.AcreditacionLinkedIn = requestCharla.AcreditacionLinkedIn;
             await this.context.SaveChangesAsync();
         }
@@ -102,6 +102,15 @@ namespace ApiTechRiders.Repositories
         {
             Charla charla = await this.FindCharlaAsync(idCharla);
             this.context.Charlas.Remove(charla);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateCharlaTechRiderAsync
+           (int idTechrider, int idCharla)
+        {
+            Charla newCharla = 
+                await this.FindCharlaAsync(idCharla);
+            newCharla.IdTechRider = idTechrider;
             await this.context.SaveChangesAsync();
         }
 
@@ -523,8 +532,11 @@ namespace ApiTechRiders.Repositories
             (int iduser)
         {
             PeticionAltaUsers newPeticion = new PeticionAltaUsers();
-            newPeticion.IdPeticionAltaUsers = await this.GetMaxPeticionAltaUsers();
+            newPeticion.IdPeticionAltaUsers = 
+                await this.GetMaxPeticionAltaUsers();
             newPeticion.IdUser = iduser;
+            //TIPOSPETICIONESCATEGORIAS
+            newPeticion.IdTipoPeticionCategoria = 1; //ALTAUSER
             this.context.PeticionesAltaUsers.Add(newPeticion);
             await this.context.SaveChangesAsync();
             return newPeticion;
@@ -633,10 +645,12 @@ namespace ApiTechRiders.Repositories
         public async Task<PeticionCentroEmpresa> InsertPeticionCentroEmpresaAsync
             (int idcentroempresa)
         {
-            PeticionCentroEmpresa newPeticionCentroEmpresa = new PeticionCentroEmpresa();
+            PeticionCentroEmpresa newPeticionCentroEmpresa = 
+                new PeticionCentroEmpresa();
             newPeticionCentroEmpresa.IdPeticionCentroEmpresa = 
                 await this.GetMaxPeticionCentroEmpresa();
             newPeticionCentroEmpresa.IdCentroEmpresa = idcentroempresa;
+            newPeticionCentroEmpresa.IdTipoPeticionCategoria = 3; //CENTRO-EMPRESA
             this.context.PeticionesCentroEmpresa.Add(newPeticionCentroEmpresa);
             await this.context.SaveChangesAsync();
             return newPeticionCentroEmpresa;
@@ -698,6 +712,9 @@ namespace ApiTechRiders.Repositories
             newPeticionCharla.IdPeticionCharla =
                 await this.GetMaxPeticionCharla();
             newPeticionCharla.IdCharla = idcharla;
+            //PONEMOS LA CATEGORIA DE LA PETICION DE LA CHARLA
+            //TABLA TIPOSPETICIONESCATEGORIAS
+            newPeticionCharla.IdTipoPeticionCategoria = 2; //CHARLA
             this.context.PeticionesCharlas.Add(newPeticionCharla);
             await this.context.SaveChangesAsync();
             return newPeticionCharla;
@@ -753,13 +770,13 @@ namespace ApiTechRiders.Repositories
         }
 
         public async Task<PeticionTecnologia> InsertPeticionTecnologiaAsync
-            (string tecnologia, int idtipopeticioncategoria)
+            (string tecnologia)
         {
             PeticionTecnologia newPeticionTecnologia = new PeticionTecnologia();
             newPeticionTecnologia.IdPeticionTecnologia = 
                 await this.GetMaxIdPeticionTecnologia();
             newPeticionTecnologia.NombreTecnologia = tecnologia;
-            newPeticionTecnologia.IdTipoPeticionCategoria = idtipopeticioncategoria;
+            newPeticionTecnologia.IdTipoPeticionCategoria = 4;
             this.context.PeticionesTecnologias.Add(newPeticionTecnologia);
             await this.context.SaveChangesAsync();
             return newPeticionTecnologia;
@@ -1290,9 +1307,8 @@ namespace ApiTechRiders.Repositories
             (ValoracionCharla requestValoracionCharla)
         {
             ValoracionCharla newValoracionCharla = await
-                this.FindValoracionCharlaAsync(requestValoracionCharla.IdValoracion);
-            newValoracionCharla.IdValoracion =
-                await this.GetMaxIdValoracionCharla();
+                this.FindValoracionCharlaAsync
+                (requestValoracionCharla.IdValoracion);
             newValoracionCharla.Comentario = requestValoracionCharla.Comentario;
             newValoracionCharla.Valoracion = requestValoracionCharla.Valoracion;
             await this.context.SaveChangesAsync();
@@ -1367,6 +1383,50 @@ namespace ApiTechRiders.Repositories
                 this.FindTipoPeticionCategoriaAsync(idpeticiontecnologia);
             this.context.TiposPeticionesCategorias.Remove(tipoPeticionCategoria);
             await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
+        #region CHARLAS VIEW
+
+        public async Task<List<CharlaView>> GetCharlasViewAsync()
+        {
+            return await this.context.CharlasView.ToListAsync();
+        }
+
+        public async Task<CharlaView>
+            FindCharlaViewAsync(int id)
+        {
+            return await
+                this.context.CharlasView
+                .FirstOrDefaultAsync(x => x.IdCharla == id);
+        }
+
+        public async Task<List<CharlaView>> 
+            GetCharlasViewTechrRiderAsync(int idTechRider)
+        {
+            return await this.context.CharlasView
+                .Where(x => x.IdTechRider == idTechRider)
+                .ToListAsync();
+        }
+
+        #endregion
+
+        #region TECHRIDERS TECNOLOGIAS 
+
+        public async Task<List<TechRiderTecnologia>>
+            GetTechRidersTecnologias()
+        {
+            return await this.context.TechRiderTecnologias.ToListAsync();
+        }
+
+        //METODO PARA BUSCAR TECNOLOGIAS POR TECHRIDER
+        public async Task<List<TechRiderTecnologia>>
+            FindTechRidersTecnologias(int idTechRider)
+        {
+            return await this.context.TechRiderTecnologias
+                .Where(x => x.IdTechRider == idTechRider)
+                .ToListAsync();
         }
 
         #endregion

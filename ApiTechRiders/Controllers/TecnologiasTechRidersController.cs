@@ -31,33 +31,33 @@ namespace ApiTechRiders.Controllers
             return await this.repo.GetTecnologiasTechRidersAsync();
         }
 
-        // GET: api/tecnologiastechriders/{idtechrider}/{idtecnologia}
-        /// <summary>
-        /// Obtiene un TECNOLOGIASTECHRIDERS por el Id de Tecnologia y por el 
-        /// ID del TechRider, tabla TECNOLOGIASTECHRIDERS.
-        /// </summary>
-        /// <remarks>
-        /// Permite buscar un objeto TECNOLOGIASTECHRIDERS por su ID
-        /// </remarks>
-        /// <param name="idtechrider">Id (GUID) del objeto TECHRIDER.</param>
-        /// <param name="idtecnologia">Id (GUID) del objeto ID DE LA TECNOLOGIA.</param>         
-        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
-        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>        
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet]
-        [Route("[action]/{idtechrider}/{idtecnologia}")]
-        public async Task<ActionResult<TecnologiaTechRiders>>
-            Find(int idtechrider, int idtecnologia)
-        {
-            var tecnologiaTechRider =
-                await this.repo.FindTecnologiasTechRidersAsync(idtechrider, idtecnologia);
-            if (tecnologiaTechRider == null)
-            {
-                return NotFound();
-            }
-            return tecnologiaTechRider;
-        }
+        //// GET: api/tecnologiastechriders/{idtechrider}/{idtecnologia}
+        ///// <summary>
+        ///// Obtiene un TECNOLOGIASTECHRIDERS por el Id de Tecnologia y por el 
+        ///// ID del TechRider, tabla TECNOLOGIASTECHRIDERS.
+        ///// </summary>
+        ///// <remarks>
+        ///// Permite buscar un objeto TECNOLOGIASTECHRIDERS por su ID
+        ///// </remarks>
+        ///// <param name="idtechrider">Id (GUID) del objeto TECHRIDER.</param>
+        ///// <param name="idtecnologia">Id (GUID) del objeto ID DE LA TECNOLOGIA.</param>         
+        ///// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        ///// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>        
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[HttpGet]
+        //[Route("[action]/{idtechrider}/{idtecnologia}")]
+        //public async Task<ActionResult<TecnologiaTechRiders>>
+        //    Find(int idtechrider, int idtecnologia)
+        //{
+        //    var tecnologiaTechRider =
+        //        await this.repo.FindTecnologiasTechRidersAsync(idtechrider, idtecnologia);
+        //    if (tecnologiaTechRider == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return tecnologiaTechRider;
+        //}
 
         // GET: api/tecnologiastechriders/all/{idtechrider}
         /// <summary>

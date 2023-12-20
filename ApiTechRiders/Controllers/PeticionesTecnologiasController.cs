@@ -63,7 +63,6 @@ namespace ApiTechRiders.Controllers
         /// El ID se genera automáticamente dentro del método
         /// </remarks>
         /// <param name="tecnologia">Nombre la tecnología a solicitar.</param>
-        /// <param name="idtipopeticioncategoria">Id de la categoría de la petición</param>       
         /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPost]
@@ -71,41 +70,41 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<PeticionTecnologia>>
                 InsertPeticionTecnologia
-            (string tecnologia, int idtipopeticioncategoria)
+            (string tecnologia)
         {
             PeticionTecnologia peticionNew =
                     await this.repo.InsertPeticionTecnologiaAsync
-                    (tecnologia, idtipopeticioncategoria);
+                    (tecnologia);
             return peticionNew;
         }
 
-        // PUT: api/peticionestecnologias
-        /// <summary>
-        /// Modifica un PETICIONES_TECNOLOGIAS en la BBDD mediante su ID, tabla PETICIONES_TECNOLOGIAS
-        /// </summary>
-        /// <param name="idpeticiontecnologia">Id de la petición de tecnología a modificar.</param>         
-        /// <param name="tecnologia">Nombre la tecnología a solicitar.</param>
-        /// <param name="idtipopeticioncategoria">Id de la categoría de la petición</param>       
-        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
-        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
-        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdatePeticion
-                (int idpeticiontecnologia,string tecnologia, int idtipopeticioncategoria)
-        {
-            var peticionFind = await this.repo.FindPeticionTecnologiasAsync
-                (idpeticiontecnologia);
-            if (peticionFind == null)
-            {
-                return NotFound();
-            }
-            await this.repo.UpdatePeticionTecnologiaAsync
-                (idpeticiontecnologia, tecnologia, idtipopeticioncategoria);
-            return Ok();
-        }
+        //// PUT: api/peticionestecnologias
+        ///// <summary>
+        ///// Modifica un PETICIONES_TECNOLOGIAS en la BBDD mediante su ID, tabla PETICIONES_TECNOLOGIAS
+        ///// </summary>
+        ///// <param name="idpeticiontecnologia">Id de la petición de tecnología a modificar.</param>         
+        ///// <param name="tecnologia">Nombre la tecnología a solicitar.</param>
+        ///// <param name="idtipopeticioncategoria">Id de la categoría de la petición</param>       
+        ///// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        ///// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        ///// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        //[HttpPut]
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult> UpdatePeticion
+        //        (int idpeticiontecnologia,string tecnologia, int idtipopeticioncategoria)
+        //{
+        //    var peticionFind = await this.repo.FindPeticionTecnologiasAsync
+        //        (idpeticiontecnologia);
+        //    if (peticionFind == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    await this.repo.UpdatePeticionTecnologiaAsync
+        //        (idpeticiontecnologia, tecnologia, idtipopeticioncategoria);
+        //    return Ok();
+        //}
 
         // DELETE: api/peticionestecnologias/{id}
         /// <summary>

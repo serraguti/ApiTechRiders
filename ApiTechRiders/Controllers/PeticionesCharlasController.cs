@@ -8,10 +8,10 @@ namespace ApiTechRiders.Controllers
     [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = true)]
-    public class PeticionesCharlasController : ControllerBase
+    public class SolicitudAcreditacionesCharlasController : ControllerBase
     {
         private RepositoryTechRiders repo;
-        public PeticionesCharlasController(RepositoryTechRiders repo)
+        public SolicitudAcreditacionesCharlasController(RepositoryTechRiders repo)
         {
             this.repo = repo;
         }
@@ -76,31 +76,31 @@ namespace ApiTechRiders.Controllers
             return peticionNew;
         }
 
-        // PUT: api/peticionescharlas
-        /// <summary>
-        /// Modifica un PETICIONESCHARLAS en la BBDD mediante su ID, tabla PETICIONESCHARLAS
-        /// </summary>
-        /// <param name="idpeticioncharla">Nombre de la categoria de la petición de Alta</param>/// 
-        /// <param name="idcharla">Id de la Charla para Modificar</param>/// 
-        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
-        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
-        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdatePeticionCharla
-                (int idpeticioncharla, int idcharla)
-        {
-            var peticionFind = await this.repo.FindPeticionCharlaAsync
-                (idpeticioncharla);
-            if (peticionFind == null)
-            {
-                return NotFound();
-            }
-            await this.repo.UpdatePeticionCharlaAsync(idpeticioncharla, idcharla);
-            return Ok();
-        }
+        //// PUT: api/peticionescharlas
+        ///// <summary>
+        ///// Modifica un PETICIONESCHARLAS en la BBDD mediante su ID, tabla PETICIONESCHARLAS
+        ///// </summary>
+        ///// <param name="idpeticioncharla">Nombre de la categoria de la petición de Alta</param>/// 
+        ///// <param name="idcharla">Id de la Charla para Modificar</param>/// 
+        ///// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        ///// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
+        ///// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        //[HttpPut]
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult> UpdatePeticionCharla
+        //        (int idpeticioncharla, int idcharla)
+        //{
+        //    var peticionFind = await this.repo.FindPeticionCharlaAsync
+        //        (idpeticioncharla);
+        //    if (peticionFind == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    await this.repo.UpdatePeticionCharlaAsync(idpeticioncharla, idcharla);
+        //    return Ok();
+        //}
 
         // DELETE: api/peticionescharlas/{id}
         /// <summary>

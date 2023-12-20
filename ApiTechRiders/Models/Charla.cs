@@ -25,10 +25,10 @@ namespace ApiTechRiders.Models
         public string Turno { get; set; } = null!;
         [Column("MODALIDAD")]
         public string Modalidad { get; set; } = null!;
-        [Column("VALORACION")]
-        public int? Valoracion { get;set; } = null!;
-        [Column("COMENTARIOS")]
-        public string Comentarios { get; set; } = null!;
+        //[Column("VALORACION")]
+        //public int? Valoracion { get;set; } = null!;
+        //[Column("COMENTARIOS")]
+        //public string Comentarios { get; set; } = null!;
         [Column("ACREDITACION_LINKEDIN")]
         public string AcreditacionLinkedIn { get; set; } = null!;
         [Column("IDCURSO")]

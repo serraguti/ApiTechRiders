@@ -89,7 +89,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateTipoEmpresa
+        public async Task<ActionResult> UpdateTipoTecnologia
                 (int idtipotecnologia, string descripcion)
         {
             var peticionFind = await this.repo.FindTipoTecnologiaAsync
@@ -98,7 +98,8 @@ namespace ApiTechRiders.Controllers
             {
                 return NotFound();
             }
-            await this.repo.UpdateTipoEmpresaAsync(idtipotecnologia, descripcion);
+            await this.repo.UpdateTipoTecnologiaAsync
+                (idtipotecnologia, descripcion);
             return Ok();
         }
 
