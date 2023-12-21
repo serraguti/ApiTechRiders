@@ -1,5 +1,6 @@
 ﻿using ApiTechRiders.Models;
 using ApiTechRiders.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,6 +68,7 @@ namespace ApiTechRiders.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<ActionResult<TipoPeticionCategoria>>
                 InsertTipoPeticionCategoria
             (string nombrecategoria)
@@ -90,6 +92,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<ActionResult> UpdateTipoPeticionCategoria
                 (int idtipopeticioncategoria, string nombrecategoria)
         {
@@ -119,6 +122,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteTipoPeticionCategoria(int id)
         {
             var peticionFind = await this.repo.FindTipoPeticionCategoriaAsync

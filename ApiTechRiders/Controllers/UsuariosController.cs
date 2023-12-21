@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace ApiTechRiders.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = true)]

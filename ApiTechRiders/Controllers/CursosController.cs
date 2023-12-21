@@ -1,5 +1,6 @@
 ﻿using ApiTechRiders.Models;
 using ApiTechRiders.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,6 +66,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Curso>>
@@ -84,6 +86,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -114,6 +117,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteCurso(int id)
         {
             var curso = await this.repo.FindCursoAsync(id);

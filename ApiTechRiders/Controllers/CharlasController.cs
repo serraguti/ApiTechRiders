@@ -67,6 +67,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Charla>>
@@ -86,6 +87,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -116,6 +118,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteCharla(int id)
         {
             var charla = await this.repo.FindCharlaAsync(id);
@@ -137,6 +140,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [Route("[action]/{idtechrider}/{idcharla}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -164,6 +168,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [Route("[action]/{idcharla}/{observaciones}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -191,6 +196,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [Route("[action]/{idcharla}/{idestadocharla}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -219,6 +225,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [Route("[action]/{idcharla}/{fechacharla}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

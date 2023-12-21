@@ -1,5 +1,6 @@
 ﻿using ApiTechRiders.Models;
 using ApiTechRiders.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -68,6 +69,7 @@ namespace ApiTechRiders.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<ActionResult<TipoTecnologia>>
                 InsertTipoEmpresa(string descripcion)
         {
@@ -89,6 +91,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public async Task<ActionResult> UpdateTipoTecnologia
                 (int idtipotecnologia, string descripcion)
         {
@@ -118,6 +121,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{idtipotecnologia}")]
+        [Authorize]
         public async Task<ActionResult> DeleteTipoEmpresa
             (int idtipotecnologia)
         {
