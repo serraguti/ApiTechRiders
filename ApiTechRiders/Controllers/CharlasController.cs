@@ -137,6 +137,7 @@ namespace ApiTechRiders.Controllers
         /// <remarks>
         /// Si el ID del TechRider es CERO, se elimina un TechRider de una 
         /// determinada Charla
+        /// El estado de la Charla cambia automáticamente en este método
         /// </remarks>
         /// <param name="idtechrider">ID del TechRider a asociar a una Charla</param>
         /// <param name="idcharla">ID de la Charla a asociar el TechRider</param>

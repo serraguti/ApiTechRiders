@@ -128,10 +128,12 @@ namespace ApiTechRiders.Repositories
             if (idTechrider == 0)
             {
                 newCharla.IdTechRider = null;
+                newCharla.IdEstadoCharla = 2;
             }
             else
             {
                 newCharla.IdTechRider = idTechrider;
+                newCharla.IdEstadoCharla = 3;
             }
             
             await this.context.SaveChangesAsync();
