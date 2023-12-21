@@ -1299,6 +1299,14 @@ namespace ApiTechRiders.Repositories
             await this.context.SaveChangesAsync();
         }
 
+        public async Task UpdatePasswordUsuarioAsync
+            (int idUsuario, string password)
+        {
+            Usuario user = await this.FindUsuarioAsync(idUsuario);
+            user.Password = password;
+            await this.context.SaveChangesAsync();
+        }
+
         #endregion
 
         #region VALORACION CHARLAS
@@ -1476,6 +1484,72 @@ namespace ApiTechRiders.Repositories
             return await this.context.TechRiderTecnologias
                 .Where(x => x.IdTechRider == idTechRider)
                 .ToListAsync();
+        }
+
+        #endregion
+
+        #region CURSOSPROFESORESVIEW
+
+        public async Task<List<CursoProfesorView>>
+            GetCursosProfesoresView()
+        {
+            return await this.context.CursosProfesoresView.ToListAsync();
+        }
+
+        public async Task<List<CursoProfesorView>>
+            GetCursosProfesorView(int idProfesor)
+        {
+            return await 
+                this.context.CursosProfesoresView.
+                Where(x => x.IdProfesor == idProfesor).
+                ToListAsync();
+        }
+
+        #endregion
+
+        #region TECHRIDERSEMPRESASVIEW
+
+        public async Task<List<TechRiderEmpresaView>>
+            GetTechRidersEmpresasViewAsync()
+        {
+            return await this.context.TechRidersEmpresasView.ToListAsync();
+        }
+
+        public async Task<List<TechRiderEmpresaView>>
+            FindTechRidersEmpresaByTechRiderViewAsync(int idTechRider)
+        {
+            return await
+                this.context.TechRidersEmpresasView.
+                Where(x => x.IdTechRider == idTechRider).
+                ToListAsync();
+        }
+
+        public async Task<List<TechRiderEmpresaView>>
+            FindTechRidersEmpresaByEmpresaViewAsync(int idEmpresa)
+        {
+            return await
+                this.context.TechRidersEmpresasView.
+                Where(x => x.IdEmpresa == idEmpresa).
+                ToListAsync();
+        }
+
+        #endregion
+
+        #region CHARLASTECHRIDERSEMPRESAVIEW
+
+        public async Task<List<CharlaTechRiderEmpresaView>>
+            GetCharlasTechRidersViewAsync()
+        {
+            return await this.context.CharlasTechRidersView.ToListAsync();
+        }
+
+        public async Task<List<CharlaTechRiderEmpresaView>>
+            FindCharlasTechRidersViewAsync(int idEmpresa)
+        {
+            return await
+                this.context.CharlasTechRidersView.
+                Where(x => x.IdEmpresa == idEmpresa).
+                ToListAsync();
         }
 
         #endregion

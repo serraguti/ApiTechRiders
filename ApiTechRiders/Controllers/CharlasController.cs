@@ -219,7 +219,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
-        [Route("[action]/{idcharla}/{idestadocharla}")]
+        [Route("[action]/{idcharla}/{fechacharla}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

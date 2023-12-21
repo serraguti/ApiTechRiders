@@ -185,5 +185,36 @@ namespace ApiTechRiders.Controllers
                 return BadRequest();
             }
         }
+
+        //ModelIdUserPassword
+        // PUT: api/usuarios/UpdateEstadoUsuario/{idusuario}/{estado}
+        /// <summary>
+        /// Modifica la constraseña de un Usuario. Tabla USUARIOS
+        /// </summary>
+        /// <remarks>
+        /// Debemos enviar JSON con IdUser y el nuevo Password
+        /// </remarks>
+        /// <response code="201">Updated. Objeto modificado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha modificado el objeto en la BD. Error en la BBDD.</response>/// 
+        /// <response code="400">BBDD. Se ha enviado un estado no válido</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut]
+        [Route("[action]")]
+        public async Task<ActionResult> UpdatePasswordUsuario
+            (ModelIdUserPassword model)
+        {
+            var user = await this.repo.FindUsuarioAsync(model.IdUser);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdatePasswordUsuarioAsync(model.IdUser
+                , model.Password);
+            return Ok();
+        }
     }
 }
