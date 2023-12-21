@@ -125,7 +125,15 @@ namespace ApiTechRiders.Repositories
         {
             Charla newCharla = 
                 await this.FindCharlaAsync(idCharla);
-            newCharla.IdTechRider = idTechrider;
+            if (idTechrider == 0)
+            {
+                newCharla.IdTechRider = null;
+            }
+            else
+            {
+                newCharla.IdTechRider = idTechrider;
+            }
+            
             await this.context.SaveChangesAsync();
         }
 

@@ -134,6 +134,10 @@ namespace ApiTechRiders.Controllers
         /// <summary>
         /// Asocia un TechRider a una Charla, tabla CHARLA
         /// </summary>
+        /// <remarks>
+        /// Si el ID del TechRider es CERO, se elimina un TechRider de una 
+        /// determinada Charla
+        /// </remarks>
         /// <param name="idtechrider">ID del TechRider a asociar a una Charla</param>
         /// <param name="idcharla">ID de la Charla a asociar el TechRider</param>
         /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
@@ -158,7 +162,7 @@ namespace ApiTechRiders.Controllers
             return Ok();
         }
 
-        // PUT: api/charlas/AsociarTechriderCharla/{idcharla}/{observaciones}
+        // PUT: api/charlas/UpdateObservacionesCharla/{idcharla}/{observaciones}
         /// <summary>
         /// Modifica las Observaciones de una Charla, Tabla CHARLAS
         /// </summary>
