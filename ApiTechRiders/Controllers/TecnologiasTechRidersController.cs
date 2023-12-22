@@ -86,7 +86,7 @@ namespace ApiTechRiders.Controllers
             return tecnologiasTechRider;
         }
 
-        // POST: api/tecnologiastechriders
+        // POST: api/tecnologiastechriders/{idtechrider}/{idtecnologia}
         /// <summary>
         /// Crea un nuevo TECNOLOGIASTECHRIDERS en la BBDD, tabla TECNOLOGIASTECHRIDERS
         /// </summary>
@@ -111,7 +111,7 @@ namespace ApiTechRiders.Controllers
             return peticionNew;
         }
 
-        // PUT: api/tecnologiastechriders
+        // PUT: api/tecnologiastechriders/{idtechrider}/{idtecnologia}
         /// <summary>
         /// Modifica un TECNOLOGIASTECHRIDERS en la BBDD mediante su ID, tabla TECNOLOGIASTECHRIDERS
         /// </summary>

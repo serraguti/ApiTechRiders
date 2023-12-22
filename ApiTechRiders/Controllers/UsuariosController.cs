@@ -147,7 +147,9 @@ namespace ApiTechRiders.Controllers
                 .SingleOrDefault(x => x.Type == "UserData");
             string jsonUser = claimUser.Value;
             Usuario user = JsonConvert.DeserializeObject<Usuario>(jsonUser);
-            return user;
+            int idUser = user.IdUsuario;
+            Usuario userValid = await this.repo.FindUsuarioAsync(idUser);
+            return userValid;
         }
 
         // PUT: api/usuarios/UpdateEstadoUsuario/{idusuario}/{estado}
