@@ -8,7 +8,6 @@ using System.Security.Claims;
 
 namespace ApiTechRiders.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = true)]
@@ -29,6 +28,7 @@ namespace ApiTechRiders.Controllers
         /// </remarks>
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<Usuario>>> Get()
         {
@@ -48,6 +48,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Usuario>> Find(int id)
         {
             var user = await this.repo.FindUsuarioAsync(id);
@@ -88,6 +89,7 @@ namespace ApiTechRiders.Controllers
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>
         /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -118,6 +120,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult> DeleteUsuario(int id)
         {
             var user = await this.repo.FindUsuarioAsync(id);
@@ -171,6 +174,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         [Route("[action]/{idusuario}/{estado}")]
+        [Authorize]
         public async Task<ActionResult> UpdateEstadoUsuario
             (int idusuario, int estado)
         {
@@ -190,7 +194,7 @@ namespace ApiTechRiders.Controllers
         }
 
         //ModelIdUserPassword
-        // PUT: api/usuarios/UpdateEstadoUsuario/{idusuario}/{estado}
+        // PUT: api/usuarios/UpdatePasswordUsuario
         /// <summary>
         /// Modifica la constraseña de un Usuario. Tabla USUARIOS
         /// </summary>
@@ -207,6 +211,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         [Route("[action]")]
+        [Authorize]
         public async Task<ActionResult> UpdatePasswordUsuario
             (ModelIdUserPassword model)
         {
