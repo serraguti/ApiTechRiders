@@ -1098,6 +1098,63 @@ namespace ApiTechRiders.Repositories
 
         #endregion
 
+        #region TECNOLOGIAS CHARLAS
+
+        public async Task<List<TecnologiaCharlas>> 
+            GetTecnologiasCharlasAsync()
+        {
+            return await this.context.TecnologiasCharlas.ToListAsync();
+        }
+
+        public async Task<TecnologiaCharlas>
+            FindTecnologiasCharlaAsync
+            (int idCharla, int idTecnologia)
+        {
+            return await this.context.TecnologiasCharlas
+                .FirstOrDefaultAsync(z => z.IdCharla == idCharla);
+        }
+
+        public async Task<List<TecnologiaCharlas>>
+            FindTecnologiasCharlaByCharlaAsync
+            (int idCharla)
+        {
+            return await this.context.TecnologiasCharlas
+                .Where(z => z.IdCharla == idCharla).ToListAsync();
+        }
+
+        public async Task<List<TecnologiaCharlas>>
+            FindTecnologiasCharlaByTecnologiaAsync
+            (int idTecnologia)
+        {
+            return await this.context.TecnologiasCharlas
+                .Where(z => z.IdTecnologia == idTecnologia).ToListAsync();
+        }
+
+        public async Task<TecnologiaCharlas>
+            InsertTecnologiaCharlasAsync
+            (int idCharla, int idTecnologia)
+        {
+            TecnologiaCharlas newTecnologiaCharlas = 
+                new TecnologiaCharlas();
+            newTecnologiaCharlas.IdCharla = idCharla;
+            newTecnologiaCharlas.IdTecnologia = idTecnologia;
+            this.context.TecnologiasCharlas.Add(newTecnologiaCharlas);
+            await this.context.SaveChangesAsync();
+            return newTecnologiaCharlas;
+        }
+
+        public async Task DeleteTecnologiaCharlasAsync
+             (int idCharla, int idTecnologia)
+        {
+            TecnologiaCharlas newTecnologiaCharlas =
+                await
+                this.FindTecnologiasCharlaAsync(idCharla, idTecnologia);
+            this.context.TecnologiasCharlas.Remove(newTecnologiaCharlas);
+            await this.context.SaveChangesAsync();
+        }
+
+        #endregion
+
         #region TIPO EMPRESA
 
         public async Task<List<TipoEmpresa>> GetTipoEmpresaAsync()
