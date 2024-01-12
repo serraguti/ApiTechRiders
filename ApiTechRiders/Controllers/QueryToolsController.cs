@@ -238,6 +238,7 @@ namespace ApiTechRiders.Controllers
         /// </summary>
         /// <remarks>
         /// Método para buscar las charlas pendientes con tecnologías de un TechRider 
+        /// NECESARIO TOKEN 
         /// </remarks>
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
