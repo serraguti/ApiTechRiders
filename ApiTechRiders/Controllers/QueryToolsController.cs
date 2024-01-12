@@ -3,6 +3,8 @@ using ApiTechRiders.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace ApiTechRiders.Controllers
 {
@@ -227,6 +229,30 @@ namespace ApiTechRiders.Controllers
             FindCharlasTechriderEmpresa(int idempresa)
         {
             return await this.repo.FindCharlasTechRidersViewAsync(idempresa);
+        }
+
+        // GET: api/querytools/findcharlastechriderempresa/{idempresa}
+        /// <summary>
+        /// Busca todas las charlas Pendientes que coincidad con las 
+        /// tecnologías de un TechRider, VIEW CHARLASPENDIENTESEMPRESAVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para buscar las charlas pendientes con tecnologías de un TechRider 
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Authorize]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<CharlaPendienteEmpresaView>>>
+            FindCharlasPendientesTecnologiasTechrider()
+        {
+            Claim claimUser = HttpContext.User.Claims
+                .SingleOrDefault(x => x.Type == "UserData");
+            string jsonUser = claimUser.Value;
+            Usuario user = JsonConvert.DeserializeObject<Usuario>(jsonUser);
+            int idUser = user.IdUsuario;
+            return await this.repo.FindCharlasPendientesMatchTecnologiaTechRider(idUser);
         }
     }
 }

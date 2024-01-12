@@ -1620,5 +1620,41 @@ namespace ApiTechRiders.Repositories
         }
 
         #endregion
+
+        #region CHARLASPENDIENTESEMPRESAVIEW
+        //VISTA PARA MOSTRAR LAS CHARLAS PENDIENTES 
+        //QUE COINCIDAN CON LAS TECNOLOGIAS DE UN TECHRIDER Y DE UNA CHARLA
+        public async Task<List<CharlaPendienteEmpresaView>>
+            FindCharlasPendientesMatchTecnologiaTechRider
+            (int idtechrider)
+        {
+            //TRAEMOS TODAS LAS TECNOLOGIAS QUE DOMINA UN TECHRIDER
+            var consultaTecnologiasTechRider = await
+                (from datos in this.context.TecnologiasTechRiders
+                where datos.IdUsuario == idtechrider
+                select datos.IdTecnologia).ToListAsync();
+            //EXTREAMOS TODOS LOS ID DE TECNOLOGIAS
+            List<int> idTecnologiasTechRider = new List<int>();
+            
+            //A CONTINUACION,
+            //DEBEMOS BUSCAR LAS CHARLAS QUE COINCIDAN
+            //CON LAS TECNOLOGIAS DE UN TECHRIDER
+            //Y EXTRAEMOS EL ID DE LAS CHARLAS
+            var consultaTecnologiasCharlas = await
+                (from datos in this.context.TecnologiasCharlas
+                where consultaTecnologiasTechRider.Contains(datos.IdTecnologia)
+                select datos.IdCharla).ToListAsync();
+            //DEBEMOS FILTRAR POR EL ESTADO DE LA CHARLA 2, PENDIENTE
+            //Y POR LAS TECNOLOGIAS QUE HAN COINCIDIDO
+            var consultaCharlasPendientes =
+                from datos in this.context.CharlasPendientesEmpresasView
+                where datos.IdEstadoCharla == 2
+                && consultaTecnologiasCharlas.Contains(datos.IdCharla)
+                select datos;
+            return await consultaCharlasPendientes.ToListAsync();
+        }
+
+
+        #endregion
     }
 }
