@@ -1622,6 +1622,7 @@ namespace ApiTechRiders.Repositories
         #endregion
 
         #region CHARLASPENDIENTESEMPRESAVIEW
+
         //VISTA PARA MOSTRAR LAS CHARLAS PENDIENTES 
         //QUE COINCIDAN CON LAS TECNOLOGIAS DE UN TECHRIDER Y DE UNA CHARLA
         public async Task<List<CharlaPendienteEmpresaView>>
@@ -1654,6 +1655,23 @@ namespace ApiTechRiders.Repositories
             return await consultaCharlasPendientes.ToListAsync();
         }
 
+
+        #endregion
+
+        #region CONSULTA TECNOLOGIAS PENDIENTES CON SUS CHARLAS
+
+        //VISTA PARA MOSTRAR TODAS LAS TECNOLOGIAS
+        //PENDIENTES POR CUBRIR EN LAS CHARLAS
+        public async Task<List<TecnologiaLibreView>>
+            GetTecnologiasPendientesEnCharlas()
+        {
+            //RECUPERAMOS TODOS LOS ID CHARLAS CON ESTADO PENDIENTE
+            var consultaTecnologiasCharlasPendientes = await
+                (from datos in this.context.TecnologiasLibresView
+                where datos.IdEstadoCharla == 2
+                select datos).ToListAsync();
+            return consultaTecnologiasCharlasPendientes;
+        }
 
         #endregion
     }

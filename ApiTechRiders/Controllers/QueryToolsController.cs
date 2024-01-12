@@ -231,7 +231,7 @@ namespace ApiTechRiders.Controllers
             return await this.repo.FindCharlasTechRidersViewAsync(idempresa);
         }
 
-        // GET: api/querytools/findcharlastechriderempresa/{idempresa}
+        // GET: api/querytools/FindCharlasPendientesTecnologiasTechrider/
         /// <summary>
         /// Busca todas las charlas Pendientes que coincidad con las 
         /// tecnologías de un TechRider, VIEW CHARLASPENDIENTESEMPRESAVIEW.
@@ -253,6 +253,25 @@ namespace ApiTechRiders.Controllers
             Usuario user = JsonConvert.DeserializeObject<Usuario>(jsonUser);
             int idUser = user.IdUsuario;
             return await this.repo.FindCharlasPendientesMatchTecnologiaTechRider(idUser);
+        }
+
+        // GET: api/querytools/GetTecnologiasPendientesEnCharlas/
+        /// <summary>
+        /// Muestra todas las tecnologías que no se han cubierto y son 
+        /// solicitadas en las charlas Pendientes
+        /// VIEW TECNOLOGIASLIBRESVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para mostrar todas las tecnologías libres por cubrir 
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<TecnologiaLibreView>>>
+            TecnologiasPendientesEnCharlas()
+        {
+            return await this.repo.GetTecnologiasPendientesEnCharlas();
         }
     }
 }
