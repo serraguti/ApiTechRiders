@@ -139,5 +139,30 @@ namespace ApiTechRiders.Controllers
                 (idcharla, idtecnologia);
             return Ok();
         }
+
+        // DELETE: api/tecnologiascharlas/{idcharla}
+        /// <summary>
+        /// Elimina todas las tecnologías asociadas a una Charla. 
+        /// </summary>
+        /// <remarks>
+        /// Enviaremos el ID de la Charla
+        /// </remarks>
+        /// <param name="idcharla">Id (GUID) del objeto CHARLA.</param>
+        /// <response code="201">Deleted. Objeto eliminado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha eliminado el objeto en la BD. Error en la BBDD.</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete]
+        [Route("[action]/{idcharla}")]
+        [Authorize]
+        public async Task<ActionResult> DeleteByIdCharla
+            (int idcharla)
+        {
+            await this.repo.DeleteTecnologiaCharlaByCharlaAsync
+                (idcharla);
+            return Ok();
+        }
     }
 }

@@ -1153,6 +1153,17 @@ namespace ApiTechRiders.Repositories
             await this.context.SaveChangesAsync();
         }
 
+        public async Task DeleteTecnologiaCharlaByCharlaAsync(int idCharla)
+        {
+            List<TecnologiaCharlas> datos =
+                await this.FindTecnologiasCharlaByCharlaAsync(idCharla);
+            foreach (var eliminar in datos)
+            {
+                this.context.TecnologiasCharlas.Remove(eliminar);
+            }
+            await this.context.SaveChangesAsync();
+        }
+
         #endregion
 
         #region TIPO EMPRESA
