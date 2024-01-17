@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiTechRiders.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(IgnoreApi = true)]
@@ -27,6 +27,7 @@ namespace ApiTechRiders.Controllers
         /// </remarks>
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<PeticionAltaUsers>>> Get()
         {
@@ -43,6 +44,7 @@ namespace ApiTechRiders.Controllers
         /// <param name="iduser">Id (GUID) del objeto PETICIONESALTAUSERS.</param>/// 
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Route("[action]/{iduser}")]
         public async Task<ActionResult<List<PeticionAltaUsers>>> Usuario(int iduser)
@@ -63,6 +65,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<PeticionAltaUsers>> Find(int id)
         {
             var peticion = await this.repo.FindPeticionesAltaUsersAsync(id);
@@ -110,6 +113,7 @@ namespace ApiTechRiders.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete]
+        [Authorize]
         public async Task<ActionResult> DeletePeticionAltaUsers
             (int idpeticion)
         {
