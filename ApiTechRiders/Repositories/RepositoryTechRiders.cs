@@ -1685,5 +1685,16 @@ namespace ApiTechRiders.Repositories
         }
 
         #endregion
+
+        #region TODOSTECHRIDERSVIEW
+
+        //CONSULTA PARA TODOS LOS TECHRIDERS
+        //DEBEMOS INDICAR SOLO LOS QUE ESTEN ACTIVOS???
+        public async Task<List<TodoTechRider>> GetTodosTechRidersViewAsync()
+        {
+            return await this.context.TodosTechRidersView.ToListAsync();
+        }
+
+        #endregion
     }
 }

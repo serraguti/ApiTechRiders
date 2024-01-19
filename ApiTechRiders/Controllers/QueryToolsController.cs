@@ -274,5 +274,23 @@ namespace ApiTechRiders.Controllers
         {
             return await this.repo.GetTecnologiasPendientesEnCharlas();
         }
+
+        // GET: api/querytools/TodosTechRiders/
+        /// <summary>
+        /// Muestra todos los TechRiders con sus datos de Empresa, si la tienen
+        /// VIEW TODOSTECHRIDERSVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para mostrar todos los TechRiders ACTIVOS (Estado = 1)
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<TodoTechRider>>>
+            TodosTechRidersActivos()
+        {
+            return await this.repo.GetTodosTechRidersViewAsync();
+        }
     }
 }

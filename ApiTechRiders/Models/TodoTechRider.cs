@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiTechRiders.Models
 {
-    [Table("TECHRIDERSEMPRESASVIEW")]
-    public class TechRiderEmpresaView
+    //TODOSTECHRIDERSVIEW
+    [Table("TODOSTECHRIDERSVIEW")]
+
+    public class TodoTechRider
     {
         [Key]
         [Column("CLAVE")]
@@ -19,6 +21,10 @@ namespace ApiTechRiders.Models
         public string TelefonoTechRider { get; set; }
         [Column("LINKEDIN")]
         public string LinkedIn { get; set; }
+        [Column("PROVINCIAUSUARIO")]
+        public string ProvinciaTechRider { get; set; }
+        [Column("ESTADO")]
+        public int Estado { get; set; }
         [Column("IDEMPRESA")]
         public int IdEmpresa { get; set; }
         [Column("EMPRESA")]
@@ -27,7 +33,6 @@ namespace ApiTechRiders.Models
         public string Direccion { get; set; }
         [Column("TELEFONOEMPRESA")]
         public string TelefonoEmpresa { get; set; }
-        [Column("PROVINCIAEMPRESA")]
-        public string ProvinciaEmpresa { get; set; }
+
     }
 }

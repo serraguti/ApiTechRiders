@@ -52,5 +52,6 @@ namespace ApiTechRiders.Data
 
         public DbSet<CharlaPendienteEmpresaView> CharlasPendientesEmpresasView { get; set; }
         public DbSet<TecnologiaLibreView> TecnologiasLibresView { get; set; }
+        public DbSet<TodoTechRider> TodosTechRidersView { get; set; }
     }
 }
