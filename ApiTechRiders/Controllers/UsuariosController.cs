@@ -157,13 +157,14 @@ namespace ApiTechRiders.Controllers
 
         // PUT: api/usuarios/UpdateEstadoUsuario/{idusuario}/{estado}
         /// <summary>
-        /// Modifica el estado de un usuario de Activo a Inactivo y viceversa. Tabla USUARIOS
+        /// Modifica el estado de un usuario. Tabla USUARIOS
         /// </summary>
         /// <remarks>
-        /// Debemos enviar el estado ACTIVO con valor 1 o INACTIVO con valor 0
+        /// Debemos enviar el estado según los datos de ESTADOSVALIDACION.
+        /// 0 - BAJA, 1 - ACTIVO, 2 - PENDIENTE
         /// </remarks>
         /// <param name="idusuario">ID del USUARIOS a Modificar</param>
-        /// <param name="estado">Estado del Usuario. 0 - INACTIVO, 1 - ACTIVO</param>
+        /// <param name="estado">Estado del Usuario. Tabla ESTADOSVALIDACION</param>
         /// <response code="201">Updated. Objeto modificado en la BBDD.</response> 
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
         /// <response code="500">BBDD. No se ha modificado el objeto en la BD. Error en la BBDD.</response>/// 
