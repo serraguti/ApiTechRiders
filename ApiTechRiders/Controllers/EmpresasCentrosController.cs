@@ -32,6 +32,25 @@ namespace ApiTechRiders.Controllers
             return await this.repo.GetEmpresasCentrosAsync();
         }
 
+        // GET: api/empresascentros
+        /// <summary>
+        /// Filtra empresas/centros por su Estado, tabla EMPRESASCENTROS.
+        /// </summary>
+        /// <remarks>
+        /// Método para devolver todos los EmpresasCentros por su estado
+        /// 0 - PENDIENTE, 1 - ACTIVO
+        /// </remarks>
+        /// <param name="estado">Estado de la empresa.</param>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]/{estado}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<EmpresasCentros>>> 
+            EmpresasCentrosEstado(int estado)
+        {
+            return await this.repo.GetEmpresasCentrosByStateAsync(estado);
+        }
+
         // GET: api/empresascentros/{id}
         /// <summary>
         /// Obtiene un EMPRESASCENTROS por su Id, tabla EMPRESASCENTROS.
@@ -128,6 +147,38 @@ namespace ApiTechRiders.Controllers
                 return NotFound();
             }
             await this.repo.DeleteEmpresasCentrosAsync(id);
+            return Ok();
+        }
+
+
+        // PUT: api/empresascentros/UpdateEstadoEmpresaCentro/{idempresacentro}/{estado}
+        /// <summary>
+        /// Modifica el estado de la Empresa.  0 - PENDIENTE, 1 - ACTIVO. Tabla EMPRESASCENTROS
+        /// </summary>
+        /// <remarks>
+        /// Enviaremos el ID de empresa y el estado 0 - PENDIENTE, 1 - ACTIVO
+        /// </remarks>
+        /// <param name="idempresacentro">ID de EMPRESASCENTROS a Modificar</param>
+        /// <param name="estado">Estado de la EmpresaCentro. ACTIVO - 1, PENDIENTE - 0</param>
+        /// <response code="201">Deleted. Objeto eliminado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha eliminado el objeto en la BD. Error en la BBDD.</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut]
+        [Route("[action]/{idempresacentro}/{estado}")]
+        [Authorize]
+        public async Task<ActionResult> UpdateEstadoEmpresaCentro
+            (int idempresacentro, int estado)
+        {
+            var empresasCentrosFind = await this.repo.FindEmpresasCentrosAsync
+                (idempresacentro);
+            if (empresasCentrosFind == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdateEmpresasCentrosEstadoAsync(idempresacentro, estado);
             return Ok();
         }
     }

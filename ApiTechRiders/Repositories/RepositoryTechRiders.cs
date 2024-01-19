@@ -313,6 +313,14 @@ namespace ApiTechRiders.Repositories
                 .FirstOrDefaultAsync(x => x.IdEmpresaCentro == idempresacentro);
         }
 
+        public async Task<List<EmpresasCentros>>
+                GetEmpresasCentrosByStateAsync(int estado)
+        {
+            return await
+                this.context.EmpresasCentros
+                .Where(x => x.EstadoEmpresa == estado).ToListAsync();
+        }
+
         private async Task<int> GetMaxIdEmpresasCentros()
         {
             if (this.context.EmpresasCentros.Count() == 0)
@@ -365,6 +373,15 @@ namespace ApiTechRiders.Repositories
             EmpresasCentros newEmpresasCentros =
                 await this.FindEmpresasCentrosAsync(idEmpresaCentro);
             this.context.EmpresasCentros.Remove(newEmpresasCentros);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateEmpresasCentrosEstadoAsync
+            (int idEmpresaCentro, int estado)
+        {
+            EmpresasCentros newEmpresasCentros =
+                await this.FindEmpresasCentrosAsync(idEmpresaCentro);
+            newEmpresasCentros.EstadoEmpresa = estado;
             await this.context.SaveChangesAsync();
         }
 

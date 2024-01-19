@@ -25,5 +25,7 @@ namespace ApiTechRiders.Models
         public string RazonSocial { get; set; } = null!;
         [Column("IDTIPOEMPRESA")]
         public int? IdTipoEmpresa { get; set; } = null!;
+        [Column("ESTADO")]
+        public int? EstadoEmpresa { get; set; } = null!;
     }
 }
