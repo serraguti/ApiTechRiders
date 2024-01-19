@@ -56,6 +56,26 @@ namespace ApiTechRiders.Controllers
             return charla;
         }
 
+        // GET: api/charlas/FindCharlasStateAsync/{idstate}
+        /// <summary>
+        /// Obtiene conjunto de Charlas enviando el Estado de la charla, tabla CHARLAS.
+        /// </summary>
+        /// <remarks>
+        /// Permite buscar un objeto Charla por IDESTADOCHARLA.  Tabla Relacional ESTADOSCHARLA
+        /// </remarks>
+        /// <param name="idstate">Id del estado de la charla</param>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>        
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet]
+        [Route("[action]/{idstate}")]
+        public async Task<ActionResult<List<Charla>>> 
+            FindCharlasStateAsync(int idstate)
+        {
+            return await this.repo.GetCharlaStateAsync(idstate);
+        }
+
         // POST: api/charlas
         /// <summary>
         /// Crea una nueva Charla en la BBDD, tabla CHARLAS

@@ -57,6 +57,14 @@ namespace ApiTechRiders.Repositories
                 .FirstOrDefaultAsync(x => x.IdCharla == id);
         }
 
+        public async Task<List<Charla>>
+            GetCharlaStateAsync(int idState)
+        {
+            return await
+                this.context.Charlas
+                .Where(x => x.IdEstadoCharla == idState).ToListAsync();
+        }
+
         private async Task<int> GetMaxIdCharla()
         {
             if (this.context.Charlas.Count() == 0)
