@@ -34,6 +34,22 @@ namespace ApiTechRiders.Controllers
 
         // GET: api/empresascentros
         /// <summary>
+        /// Obtiene el conjunto de EMPRESAS/CENTROS con Formato, tabla EMPRESASFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para devolver todas las Empresas/Centros con formato
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<EmpresaFormatoView>>> EmpresasFormato()
+        {
+            return await this.repo.GetTodosEmpresasFormatoViewAsync();
+        }
+
+        // GET: api/empresascentros/{estado}
+        /// <summary>
         /// Filtra empresas/centros por su Estado, tabla EMPRESASCENTROS.
         /// </summary>
         /// <remarks>

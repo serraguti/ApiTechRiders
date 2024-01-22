@@ -1731,5 +1731,15 @@ namespace ApiTechRiders.Repositories
         }
 
         #endregion
+
+        #region EMPRESASFORMATOVIEW
+
+        //DEVUELVE TODAS LAS EMPRESAS CON FORMATO
+        public async Task<List<EmpresaFormatoView>> GetTodosEmpresasFormatoViewAsync()
+        {
+            return await this.context.EmpresasFormatoView.ToListAsync();
+        }
+
+        #endregion
     }
 }
