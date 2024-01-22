@@ -35,6 +35,23 @@ namespace ApiTechRiders.Controllers
             return await this.repo.GetUsuarioAsync();
         }
 
+        // GET: api/usuarios
+        /// <summary>
+        /// Obtiene el conjunto de USUARIOS con formato, tabla USERSFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para devolver todos las USUARIOS con datos Formateados
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        //[Authorize]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<UserFormatoView>>> UsersFormato()
+        {
+            return await this.repo.GetTodosUsersFormatoViewAsync();
+        }
+
         // GET: api/usuarios/{id}
         /// <summary>
         /// Obtiene un USUARIOS por su Id, tabla USUARIOS.

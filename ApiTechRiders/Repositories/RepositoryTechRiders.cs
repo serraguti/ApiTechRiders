@@ -1721,5 +1721,15 @@ namespace ApiTechRiders.Repositories
         }
 
         #endregion
+
+        #region USERSFORMATOVIEW
+
+        //DEVUELVE TODOS LOS USUARIOS CON FORMATO
+        public async Task<List<UserFormatoView>> GetTodosUsersFormatoViewAsync()
+        {
+            return await this.context.UsersFormatoView.ToListAsync();
+        }
+
+        #endregion
     }
 }
