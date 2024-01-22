@@ -41,10 +41,11 @@ namespace ApiTechRiders.Controllers
         /// </summary>
         /// <remarks>
         /// Método para devolver todos las USUARIOS con datos Formateados
+        /// Necesario TOKEN
         /// </remarks>
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         [Route("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<UserFormatoView>>> UsersFormato()
