@@ -1730,6 +1730,15 @@ namespace ApiTechRiders.Repositories
             return await this.context.UsersFormatoView.ToListAsync();
         }
 
+        //DEVUELVE TODOS LOS USUARIOS CON FORMATO POR ESTADO
+        public async Task<List<UserFormatoView>> 
+            GetUsersFormatoViewByEstadoAsync(int estado)
+        {
+            return await this.context.UsersFormatoView
+                .Where(z => z.IdEstadoValidacion == estado)
+                .ToListAsync();
+        }
+
         #endregion
 
         #region EMPRESASFORMATOVIEW

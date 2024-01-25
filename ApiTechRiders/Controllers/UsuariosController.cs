@@ -35,7 +35,7 @@ namespace ApiTechRiders.Controllers
             return await this.repo.GetUsuarioAsync();
         }
 
-        // GET: api/usuarios
+        // GET: api/usuarios/UsersFormato
         /// <summary>
         /// Obtiene el conjunto de USUARIOS con formato, tabla USERSFORMATOVIEW.
         /// </summary>
@@ -51,6 +51,26 @@ namespace ApiTechRiders.Controllers
         public async Task<ActionResult<List<UserFormatoView>>> UsersFormato()
         {
             return await this.repo.GetTodosUsersFormatoViewAsync();
+        }
+
+        // GET: api/usuarios/UsersFormatoByEstado/{estado}
+        /// <summary>
+        /// Obtiene el conjunto de USUARIOS con formato por Estado, tabla USERSFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para filtrar todos las USUARIOS con datos Formateados por Estado
+        /// Necesario TOKEN
+        /// </remarks>
+        /// <param name="estado">Id del estado del Usuario.</param>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Authorize]
+        [Route("[action]/{estado}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<UserFormatoView>>> 
+            UsersFormatoByEstado(int estado)
+        {
+            return await this.repo.GetUsersFormatoViewByEstadoAsync(estado);
         }
 
         // GET: api/usuarios/{id}
