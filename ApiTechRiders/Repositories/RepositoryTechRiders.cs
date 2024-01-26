@@ -1781,6 +1781,27 @@ namespace ApiTechRiders.Repositories
             return await this.context.EmpresasFormatoView.ToListAsync();
         }
 
+        //METODO PARA DEVOLVER TODAS LAS EMPRESAS LIBRES, ES DECIR, 
+        //QUE NO TENGAN UN RESPONSABLE DE EMPRESA ASIGNADO
+        //DEVUELVE TODAS LAS EMPRESAS CON FORMATO
+        public async Task<List<EmpresaFormatoView>> 
+            GetEmpresasFormatoLibresViewAsync()
+        {
+            //BUSCAMOS LOS ID DE EMPRESAS DE LOS USUARIOS CON ROLE RESPONSABLE
+            //LOS IDS QUE EXISTEN
+            var consultaEmpresasOcupadas = from datos in this.context.Usuarios
+                           where datos.IdRole == 4
+                           && datos.IdEmpresaCentro != null
+                           select datos.IdEmpresaCentro.Value;
+            List<int> idsEmpresasOcupadas = new List<int>();
+            idsEmpresasOcupadas = await consultaEmpresasOcupadas.ToListAsync();
+            //BUSCAMOS LAS EMPRESAS QUE NO ESTEN DENTRO DE LA COLECCION
+            var consulta = from datos in this.context.EmpresasFormatoView
+                           where idsEmpresasOcupadas.Contains(datos.IdEmpresaCentro) == false
+                           select datos;
+            return await consulta.ToListAsync();
+        }
+
         #endregion
 
         #region PETICIONESFORMATOVIEW
