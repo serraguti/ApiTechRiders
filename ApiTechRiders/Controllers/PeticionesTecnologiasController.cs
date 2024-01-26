@@ -56,7 +56,7 @@ namespace ApiTechRiders.Controllers
             return peticion;
         }
 
-        // POST: api/peticionestecnologias
+        // POST: api/peticionestecnologias/{tecnologia}
         /// <summary>
         /// Crea un nuevo PETICIONES_TECNOLOGIAS en la BBDD, tabla PETICIONES_TECNOLOGIAS
         /// </summary>
@@ -70,6 +70,7 @@ namespace ApiTechRiders.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("[action]/{tecnologia}")]
         public async Task<ActionResult<PeticionTecnologia>>
                 InsertPeticionTecnologia
             (string tecnologia)

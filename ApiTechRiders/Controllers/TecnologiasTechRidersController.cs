@@ -101,6 +101,7 @@ namespace ApiTechRiders.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Route("[action]/{idtechrider}/{idtecnologia}")]
         [Authorize]
         public async Task<ActionResult<TecnologiaTechRiders>>
                 InsertTecnologiaTechRiders(int idtechrider, int idtecnologia)
