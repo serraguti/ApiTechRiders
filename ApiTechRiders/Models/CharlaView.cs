@@ -43,5 +43,9 @@ namespace ApiTechRiders.Models
         public int IdRole { get; set; }
         [Column("TIPOROLE")]
         public string TipoRole { get; set; }
+        [Column("VALORACION")]
+        public int Valoracion { get; set; }
+        [Column("COMENTARIOVALORACION")]
+        public string ComentarioValoracion { get; set; }
     }
 }
