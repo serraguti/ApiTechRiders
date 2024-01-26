@@ -30,5 +30,7 @@ namespace ApiTechRiders.Models
         public int? IdEmpresaCentro { get; set; } = null!;
         [Column("ESTADO")]
         public int Estado { get;set; }
+        [Column("LINKEDINVISIBLE")]
+        public int LinkedInVisible { get; set; }
     }
 }

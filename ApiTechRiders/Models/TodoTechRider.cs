@@ -33,6 +33,7 @@ namespace ApiTechRiders.Models
         public string Direccion { get; set; }
         [Column("TELEFONOEMPRESA")]
         public string TelefonoEmpresa { get; set; }
-
+        [Column("LINKEDINVISIBLE")]
+        public int LinkedInVisible { get; set; }
     }
 }

@@ -222,7 +222,7 @@ namespace ApiTechRiders.Controllers
             {
                 return NotFound();
             }
-            if (estado == 0 || estado == 1) {
+            if (estado == 0 || estado == 1 || estado == 2) {
                 await this.repo.UpdateEstadoUsuarioAsync(idusuario, estado);
                 return Ok();
             }
@@ -263,5 +263,43 @@ namespace ApiTechRiders.Controllers
                 , model.Password);
             return Ok();
         }
+
+        // PUT: api/usuarios/UpdateVisibilidadLinkedIn/{idusuario}/{visible}
+        /// <summary>
+        /// Modifica la visibilidad de LinkedIn de un usuario. Tabla USUARIOS
+        /// </summary>
+        /// <remarks>
+        /// Debemos enviar la visibilidad.
+        /// 0 - NO VISIBLE, 1 - VISIBLE
+        /// </remarks>
+        /// <param name="idusuario">ID del USUARIOS a Modificar</param>
+        /// <param name="visible">Visibilidad del LinkedIn del usuario</param>
+        /// <response code="201">Updated. Objeto modificado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha modificado el objeto en la BD. Error en la BBDD.</response>/// 
+        /// <response code="400">BBDD. Se ha enviado un estado no válido</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut]
+        [Route("[action]/{idusuario}/{visible}")]
+        [Authorize]
+        public async Task<ActionResult> UpdateVisibilidadLinkedIn
+            (int idusuario, int visible)
+        {
+            var user = await this.repo.FindUsuarioAsync(idusuario);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            bool dato = false;
+            if (visible == 1)
+            {
+                dato = true;
+            }
+            await this.repo.UpdateLinkedInVisibleAsync(idusuario, dato);
+            return Ok();
+         }
     }
 }

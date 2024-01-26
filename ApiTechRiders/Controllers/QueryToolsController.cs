@@ -310,5 +310,43 @@ namespace ApiTechRiders.Controllers
         {
             return await this.repo.GetTodosTechRidersViewAsync();
         }
+
+        // GET: api/querytools/TodasPeticionesFormato
+        /// <summary>
+        /// Devuelve todas las Peticiones con Formato.
+        /// VIEW PETICIONESFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para mostrar todas las peticiones juntas
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<PeticionFormatoView>>>
+            TodasPeticionesFormato()
+        {
+            return await this.repo.GetPeticionesFormatoViewAsync();
+        }
+
+        // GET: api/querytools/TodasPeticionesFormatoByTipoPeticion/{idtipopeticion}
+        /// <summary>
+        /// Devuelve todas las Peticiones filtradas por el Tipo de petición con Formato.
+        /// VIEW PETICIONESFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para buscar en todas las peticiones filtrando por el ID de Tipo de petición
+        /// </remarks>
+        /// <param name="idtipopeticion">Id del tipo de petición. Tabla TIPOSPETICIONESCATEGORIAS</param>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]/{idtipopeticion}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<PeticionFormatoView>>>
+            TodasPeticionesFormatoByTipoPeticion(int idtipopeticion)
+        {
+            return 
+                await this.repo.GetPeticionesFormatoByTipoPeticionViewAsync(idtipopeticion);
+        }
     }
 }

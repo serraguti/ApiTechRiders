@@ -29,5 +29,7 @@ namespace ApiTechRiders.Models
         public string TelefonoEmpresa { get; set; }
         [Column("PROVINCIAEMPRESA")]
         public string ProvinciaEmpresa { get; set; }
+        [Column("LINKEDINVISIBLE")]
+        public int LinkedInVisible { get; set; }
     }
 }

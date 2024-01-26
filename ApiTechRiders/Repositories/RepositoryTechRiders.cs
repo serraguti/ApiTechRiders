@@ -1365,6 +1365,7 @@ namespace ApiTechRiders.Repositories
             newUsuario.Estado = requestUsuario.Estado;
             newUsuario.Apellidos = requestUsuario.Apellidos;
             newUsuario.Email = requestUsuario.Email;
+            newUsuario.LinkedInVisible = requestUsuario.LinkedInVisible;
             this.context.Usuarios.Add(newUsuario);
             await this.context.SaveChangesAsync();
             return newUsuario;
@@ -1385,6 +1386,7 @@ namespace ApiTechRiders.Repositories
             newUsuario.Estado = requestUsuario.Estado;
             newUsuario.Apellidos = requestUsuario.Apellidos;
             newUsuario.Email = requestUsuario.Email;
+            newUsuario.LinkedInVisible = requestUsuario.LinkedInVisible;
             await this.context.SaveChangesAsync();
         }
 
@@ -1407,6 +1409,18 @@ namespace ApiTechRiders.Repositories
         {
             Usuario user = await this.FindUsuarioAsync(idUsuario);
             user.Password = password;
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task UpdateLinkedInVisibleAsync(int idUsuario, bool peticion)
+        {
+            int linkedInVisible = 0;
+            if (peticion == true)
+            {
+                linkedInVisible = 1;
+            }
+            Usuario user = await this.FindUsuarioAsync(idUsuario);
+            user.LinkedInVisible = linkedInVisible;
             await this.context.SaveChangesAsync();
         }
 
@@ -1765,6 +1779,28 @@ namespace ApiTechRiders.Repositories
         public async Task<List<EmpresaFormatoView>> GetTodosEmpresasFormatoViewAsync()
         {
             return await this.context.EmpresasFormatoView.ToListAsync();
+        }
+
+        #endregion
+
+        #region PETICIONESFORMATOVIEW
+
+        //DEVUELVE TODAS LAS PETICIONES CON FORMATO
+        public async Task<List<PeticionFormatoView>> GetPeticionesFormatoViewAsync()
+        {
+            return await this.context.PeticionesFormatoView
+                .OrderBy(z => z.IdTipoPeticion)
+                .ToListAsync();
+        }
+
+        //FILTRA PETICIONES POR EL ID DEL TIPO DE PETICION CON FORMATO
+        public async Task<List<PeticionFormatoView>> 
+            GetPeticionesFormatoByTipoPeticionViewAsync(int idTipoPeticion)
+        {
+            return await this.context.PeticionesFormatoView
+                .Where(z => z.IdTipoPeticion == idTipoPeticion)
+                .OrderBy(z => z.IdRegistroPeticion)
+                .ToListAsync();
         }
 
         #endregion
