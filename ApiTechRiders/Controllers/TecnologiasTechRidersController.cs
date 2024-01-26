@@ -101,6 +101,31 @@ namespace ApiTechRiders.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
+        public async Task<ActionResult<TecnologiaTechRiders>>
+                PostTecnologiaTechRiders(int idtechrider, int idtecnologia)
+        {
+            TecnologiaTechRiders peticionNew =
+                    await this.repo.InsertTecnologiaTechRiderAsync
+                    (idtechrider, idtecnologia);
+            return peticionNew;
+        }
+
+        // POST: api/tecnologiastechriders/{idtechrider}/{idtecnologia}
+        /// <summary>
+        /// Crea un nuevo TECNOLOGIASTECHRIDERS en la BBDD, tabla TECNOLOGIASTECHRIDERS
+        /// </summary>
+        /// <remarks>
+        /// Este método inserta un nuevo TECNOLOGIASTECHRIDERS enviando el TECHRIDER y 
+        /// el ID de la Tecnología
+        /// </remarks>
+        /// <param name="idtechrider">Id (GUID) del objeto TECHRIDER.</param>
+        /// <param name="idtecnologia">Id (GUID) del objeto ID DE LA TECNOLOGIA.</param>  
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [Route("[action]/{idtechrider}/{idtecnologia}")]
         [Authorize]
         public async Task<ActionResult<TecnologiaTechRiders>>

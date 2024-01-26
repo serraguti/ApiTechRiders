@@ -65,12 +65,30 @@ namespace ApiTechRiders.Controllers
         /// <param name="idtechrider">Id del TechRider para buscar sus charlas.</param>
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
-        [Route("[action]")]
+        [Route("[action]/{idtechrider}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<CharlaView>>>
             CharlasTechRider(int idtechrider)
         {
             return await this.repo.GetCharlasViewTechrRiderAsync(idtechrider);
+        }
+
+        // GET: api/querytools/CharlasCursosProfesor/{idprofesor}
+        /// <summary>
+        /// TODAS LAS CHARLAS de TODOS LOS CURSOS DE UN PROFESOR, VIEW VISTACHARLAS.
+        /// </summary>
+        /// <remarks>
+        /// Método para buscar todas las Charlas de los cursos de un Profesor
+        /// </remarks>
+        /// <param name="idprofesor">Id del TechRider para buscar sus charlas.</param>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]/{idprofesor}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<CharlaView>>>
+            CharlasCursosProfesor(int idprofesor)
+        {
+            return await this.repo.GetCharlasViewProfesorCursosAsync(idprofesor);
         }
 
         // GET: api/querytools/tecnologiastechriders

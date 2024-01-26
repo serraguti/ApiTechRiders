@@ -1570,6 +1570,24 @@ namespace ApiTechRiders.Repositories
                 .ToListAsync();
         }
 
+        //METODO PARA DEVOLVER TODAS LAS CHARLAS de TODOS LOS CURSOS DE UN PROFESOR
+        public async Task<List<CharlaView>>
+            GetCharlasViewProfesorCursosAsync(int idProfesor)
+        {
+            //PRIMERO DEBEMOS BUSCAR EL IDCURSO DE UN USUARIO
+            //SELECT * FROM CURSOS_PROFESORES
+            var consultaCursosProfe = from datos in this.context.CursosProfesores
+                           where datos.IdProfesor == idProfesor
+                           select datos.IdCurso;
+            List<int> cursosOfTeacher = new List<int>();
+            cursosOfTeacher = await consultaCursosProfe.ToListAsync();
+            //AHORA DEVOLVEMOS EL CONTAINS FILTRANDO POR LOS CURSOS
+            var consulta = from datos in this.context.CharlasView
+                           where cursosOfTeacher.Contains(datos.IdCurso)
+                           select datos;
+            return await consulta.ToListAsync();
+        }
+
         #endregion
 
         #region TECHRIDERS TECNOLOGIAS 

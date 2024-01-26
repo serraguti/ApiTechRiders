@@ -61,7 +61,31 @@ namespace ApiTechRiders.Controllers
         /// Crea un nuevo PETICIONES_TECNOLOGIAS en la BBDD, tabla PETICIONES_TECNOLOGIAS
         /// </summary>
         /// <remarks>
-        /// Este método inserta un nuevo PETICIONES_TECNOLOGIAS enviando el Objeto JSON
+        /// Este método inserta un nuevo PETICIONES_TECNOLOGIAS enviando Tecnología
+        /// El ID se genera automáticamente dentro del método
+        /// </remarks>
+        /// <param name="tecnologia">Nombre la tecnología a solicitar.</param>
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<PeticionTecnologia>>
+                PostPeticionTecnologia
+            (string tecnologia)
+        {
+            PeticionTecnologia peticionNew =
+                    await this.repo.InsertPeticionTecnologiaAsync
+                    (tecnologia);
+            return peticionNew;
+        }
+
+        // POST: api/peticionestecnologias/InsertPeticionTecnologia/{tecnologia}
+        /// <summary>
+        /// Crea un nuevo PETICIONES_TECNOLOGIAS en la BBDD, tabla PETICIONES_TECNOLOGIAS
+        /// </summary>
+        /// <remarks>
+        /// Este método inserta un nuevo PETICIONES_TECNOLOGIAS enviando la tecnología
         /// El ID se genera automáticamente dentro del método
         /// </remarks>
         /// <param name="tecnologia">Nombre la tecnología a solicitar.</param>

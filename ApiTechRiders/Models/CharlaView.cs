@@ -39,5 +39,9 @@ namespace ApiTechRiders.Models
         public string Email { get; set; }
         [Column("TELEFONO")]
         public string Telefono { get; set; }
+        [Column("IDROLE")]
+        public int IdRole { get; set; }
+        [Column("TIPOROLE")]
+        public string TipoRole { get; set; }
     }
 }
