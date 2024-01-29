@@ -385,6 +385,23 @@ namespace ApiTechRiders.Repositories
             await this.context.SaveChangesAsync();
         }
 
+        public async Task UpdateEmpresasCentrosResponsableAsync
+    (int idEmpresaCentro, int idResponsable)
+        {
+            Usuario usuario =
+                this.context.Usuarios.FirstOrDefault(x => x.IdUsuario
+                == idResponsable);
+            if (idEmpresaCentro == 0)
+            {
+                usuario.IdEmpresaCentro = null;
+            }
+            else
+            {
+                usuario.IdEmpresaCentro = idEmpresaCentro;
+            }
+            await this.context.SaveChangesAsync();
+        }
+
         #endregion
 
         #region ESTADOSCHARLAS
