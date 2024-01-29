@@ -301,5 +301,44 @@ namespace ApiTechRiders.Controllers
             await this.repo.UpdateLinkedInVisibleAsync(idusuario, dato);
             return Ok();
          }
+
+        // PUT: api/usuarios/UpdateResponsableEmpresaCentro/{idempresacentro}/{idresponsable}
+        /// <summary>
+        /// Modifica el Responsable de una Empresa. Tabla USUARIOS
+        /// </summary>
+        /// <remarks>
+        /// Enviaremos el ID de empresa y el Id del Responsable
+        /// Si envíamos el valor de 0, se quitará (null) el responsable de una Empresa
+        /// </remarks>
+        /// <param name="idempresacentro">ID de EMPRESASCENTROS a Modificar</param>
+        /// <param name="idresponsable">Id del Responsable de Empresa.</param>
+        /// <response code="201">Deleted. Objeto eliminado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha eliminado el objeto en la BD. Error en la BBDD.</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPut]
+        [Route("[action]/{idempresacentro}/{idresponsable}")]
+        [Authorize]
+        public async Task<ActionResult> UpdateResponsableEmpresaCentro
+            (int idempresacentro, int idresponsable)
+        {
+            var empresasCentrosFind = await this.repo.FindEmpresasCentrosAsync
+                (idempresacentro);
+            var responsable = await
+                this.repo.FindUsuarioAsync(idresponsable);
+            if (empresasCentrosFind == null)
+            {
+                return NotFound();
+            }
+            else if (responsable == null)
+            {
+                return NotFound();
+            }
+            await this.repo.UpdateEmpresasCentrosResponsableAsync
+                (idempresacentro, idresponsable);
+            return Ok();
+        }
     }
 }

@@ -106,12 +106,12 @@ namespace ApiTechRiders.Controllers
 
         // DELETE: api/peticionescentroempresa/{id}
         /// <summary>
-        /// Elimina un PETICIONESCATEGORIAS en la BBDD mediante su ID. Tabla PETICIONESCATEGORIAS
+        /// Elimina un PETICIONESCENTROEMPRESA en la BBDD mediante su ID. Tabla PETICIONESCENTROEMPRESA
         /// </summary>
         /// <remarks>
         /// Enviaremos el ID mediante la URL
         /// </remarks>
-        /// <param name="idpeticion">ID de PETICIONES a eliminar de PETICIONESCATEGORIAS</param>
+        /// <param name="idpeticion">ID de PETICIONESCENTROEMPRESA a eliminar de PETICIONESCENTROEMPRESA</param>
         /// <response code="201">Deleted. Objeto eliminado en la BBDD.</response> 
         /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
         /// <response code="500">BBDD. No se ha eliminado el objeto en la BD. Error en la BBDD.</response>/// 
@@ -129,6 +129,36 @@ namespace ApiTechRiders.Controllers
                 return NotFound();
             }
             await this.repo.DeletePeticionCentroEmpresaAsync(idpeticion);
+            return Ok();
+        }
+
+        //
+        // DELETE: api/peticionescentroempresa/DeletePeticionEmpresaAll/{idpeticion}
+        /// <summary>
+        /// Elimina un PETICIONESCENTROEMPRESA en la BBDD mediante su ID. Tabla PETICIONESCENTROEMPRESA
+        /// </summary>
+        /// <remarks>
+        /// Elimina la petición de la Empresa, quita al responsable y también elimina la Empresa
+        /// </remarks>
+        /// <param name="idpeticion">ID de PETICIONESCENTROEMPRESA a eliminar de PETICIONESCENTROEMPRESA</param>
+        /// <response code="201">Deleted. Objeto eliminado en la BBDD.</response> 
+        /// <response code="404">NotFound. No se ha encontrado el objeto solicitado.</response>    
+        /// <response code="500">BBDD. No se ha eliminado el objeto en la BD. Error en la BBDD.</response>/// 
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete]
+        [Route("[action]/{idpeticion}")]
+        public async Task<ActionResult> DeletePeticionEmpresaAll
+            (int idpeticion)
+        {
+            var peticionFind = await this.repo.FindPeticionCentroEmpresaAsync
+                (idpeticion);
+            if (peticionFind == null)
+            {
+                return NotFound();
+            }
+            await this.repo.DeletePeticionCentroEmpresaAllAsync(idpeticion);
             return Ok();
         }
     }

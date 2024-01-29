@@ -347,6 +347,7 @@ namespace ApiTechRiders.Repositories
             newEmpresasCentros.PersonaContacto = requestEmpresasCentros.PersonaContacto;
             newEmpresasCentros.RazonSocial = requestEmpresasCentros.RazonSocial;
             newEmpresasCentros.Telefono = requestEmpresasCentros.Telefono;
+            newEmpresasCentros.EstadoEmpresa = requestEmpresasCentros.EstadoEmpresa;
             this.context.EmpresasCentros.Add(newEmpresasCentros);
             await this.context.SaveChangesAsync();
             return newEmpresasCentros;
@@ -365,6 +366,7 @@ namespace ApiTechRiders.Repositories
             newEmpresasCentros.PersonaContacto = requestEmpresasCentros.PersonaContacto;
             newEmpresasCentros.RazonSocial = requestEmpresasCentros.RazonSocial;
             newEmpresasCentros.Telefono = requestEmpresasCentros.Telefono;
+            newEmpresasCentros.EstadoEmpresa = requestEmpresasCentros.EstadoEmpresa;
             await this.context.SaveChangesAsync();
         }
 
@@ -765,6 +767,40 @@ namespace ApiTechRiders.Repositories
             PeticionCentroEmpresa peticionCentroEmpresa = await
                 this.FindPeticionCentroEmpresaAsync(idPeticionCentroEmpresa);
             this.context.PeticionesCentroEmpresa.Remove(peticionCentroEmpresa);
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task DeletePeticionCentroEmpresaAllAsync
+            (int idPeticionCentroEmpresa)
+        {
+            PeticionCentroEmpresa peticionCentroEmpresa = await
+                this.FindPeticionCentroEmpresaAsync(idPeticionCentroEmpresa);
+            /*
+             AL ELIMINAR UNA PETICION DEL CENTRO DE EMPRESA, 
+                QUITAR AL RESPONSABLE (IDCENTROEMPRESA=null)
+                Y ELIMINAR LA EMPRESA SOLICITANTE
+             */
+            int idEmpresaEliminar =
+                peticionCentroEmpresa.IdCentroEmpresa;
+            //BUSCAMOS AL USUARIO RESPONSABLE DE LA EMPRESA
+            var consulta = this.context.Usuarios
+                .Where(x => x.IdEmpresaCentro == idEmpresaEliminar);
+            List<Usuario> listaResponsables =
+                await consulta.ToListAsync();
+            //QUITAMOS A LOS RESPONSABLES DE EMPRESA
+            foreach (Usuario user in listaResponsables)
+            {
+                user.IdEmpresaCentro = null;
+            }
+            //GUARDAMOS CAMBIOS PARA LIBERAR LOS DATOS
+            await this.context.SaveChangesAsync();
+            //ELIMINAMOS LA PETICION
+            this.context.PeticionesCentroEmpresa.Remove(peticionCentroEmpresa);
+            //ELIMINAMOS LA EMPRESA
+            await this.context.SaveChangesAsync();
+            EmpresasCentros empresaEliminar =
+                await this.FindEmpresasCentrosAsync(idEmpresaEliminar);
+            this.context.EmpresasCentros.Remove(empresaEliminar);
             await this.context.SaveChangesAsync();
         }
 
