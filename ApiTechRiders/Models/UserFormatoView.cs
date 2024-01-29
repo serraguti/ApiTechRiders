@@ -29,5 +29,9 @@ namespace ApiTechRiders.Models
         public int IdEstadoValidacion { get; set; }
         [Column("LINKEDINVISIBLE")]
         public int LinkedInVisible { get; set; }
+        [Column("IDROLE")]
+        public int IdRole { get; set; }
+        [Column("TIPOROLE")]
+        public string TipoRole { get; set; }
     }
 }
