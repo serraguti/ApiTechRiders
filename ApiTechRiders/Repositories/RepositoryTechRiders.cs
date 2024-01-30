@@ -1834,6 +1834,15 @@ namespace ApiTechRiders.Repositories
             return await this.context.EmpresasFormatoView.ToListAsync();
         }
 
+        //DEVUELVE TODAS LAS EMPRESAS CON FORMATO POR SU ESTADO
+        public async Task<List<EmpresaFormatoView>>
+            GetEmpresasFormatoViewByStateAsync(int estado)
+        {
+            return await this.context.EmpresasFormatoView
+                .Where(z => z.EstadoEmpresa == estado)
+                .ToListAsync();
+        }
+
         //METODO PARA DEVOLVER TODAS LAS EMPRESAS LIBRES, ES DECIR, 
         //QUE NO TENGAN UN RESPONSABLE DE EMPRESA ASIGNADO
         //DEVUELVE TODAS LAS EMPRESAS CON FORMATO

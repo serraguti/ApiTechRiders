@@ -65,6 +65,25 @@ namespace ApiTechRiders.Controllers
             return await this.repo.GetEmpresasFormatoLibresViewAsync();
         }
 
+        // GET: api/empresascentros/EmpresasCentrosFormatoEstado/{estado}
+        /// <summary>
+        /// Filtra empresas/centros por su Estado, tabla EMPRESASFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para devolver todas las Empresas/Centros con formato por su estado
+        /// 0 - PENDIENTE, 1 - ACTIVO
+        /// </remarks>
+        /// <param name="estado">Estado de la empresa.</param>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]/{estado}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<EmpresaFormatoView>>>
+            EmpresasCentrosFormatoEstado(int estado)
+        {
+            return await this.repo.GetEmpresasFormatoViewByStateAsync(estado);
+        }
+
         // GET: api/empresascentros/{estado}
         /// <summary>
         /// Filtra empresas/centros por su Estado, tabla EMPRESASCENTROS.
