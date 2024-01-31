@@ -65,6 +65,23 @@ namespace ApiTechRiders.Controllers
             return await this.repo.GetEmpresasFormatoLibresViewAsync();
         }
 
+        // GET: api/EmpresasConResponsables
+        /// <summary>
+        /// Obtiene el conjunto de EMPRESA con Formato CON Responsables, tabla EMPRESASFORMATOVIEW.
+        /// </summary>
+        /// <remarks>
+        /// Método para devolver todas las Empresas con Responsable asignado
+        /// </remarks>
+        /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
+        [HttpGet]
+        [Route("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<EmpresaFormatoView>>>
+            EmpresasConResponsables()
+        {
+            return await this.repo.GetEmpresasFormatoConResponsablesViewAsync();
+        }
+
         // GET: api/empresascentros/EmpresasCentrosFormatoEstado/{estado}
         /// <summary>
         /// Filtra empresas/centros por su Estado, tabla EMPRESASFORMATOVIEW.

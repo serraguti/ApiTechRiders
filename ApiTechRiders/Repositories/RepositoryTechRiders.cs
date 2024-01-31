@@ -1864,6 +1864,25 @@ namespace ApiTechRiders.Repositories
             return await consulta.ToListAsync();
         }
 
+        //METODO PARA DEVOLVER TODAS LAS EMPRESAS CON RESPONSABLE ASIGNADO
+        public async Task<List<EmpresaFormatoView>>
+            GetEmpresasFormatoConResponsablesViewAsync()
+        {
+            //BUSCAMOS LOS ID DE EMPRESAS DE LOS USUARIOS CON ROLE RESPONSABLE
+            //LOS IDS QUE EXISTEN
+            var consultaEmpresasOcupadas = from datos in this.context.Usuarios
+                                           where datos.IdRole == 4
+                                           && datos.IdEmpresaCentro != null
+                                           select datos.IdEmpresaCentro.Value;
+            List<int> idsEmpresasOcupadas = new List<int>();
+            idsEmpresasOcupadas = await consultaEmpresasOcupadas.ToListAsync();
+            //BUSCAMOS LAS EMPRESAS QUE ESTEN DENTRO DE LA COLECCION
+            var consulta = from datos in this.context.EmpresasFormatoView
+                           where idsEmpresasOcupadas.Contains(datos.IdEmpresaCentro)
+                           select datos;
+            return await consulta.ToListAsync();
+        }
+
         #endregion
 
         #region PETICIONESFORMATOVIEW
