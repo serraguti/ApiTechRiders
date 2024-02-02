@@ -166,7 +166,7 @@ namespace ApiTechRiders.Controllers
         /// Devuelve el conjunto de TECHRIDERSEMPRESASVIEW, VIEW TECHRIDERSEMPRESASVIEW.
         /// </summary>
         /// <remarks>
-        /// Método para recuperar todos los Cursos con profesores
+        /// Método para recuperar todos los TechRiders con Empresa y formato
         /// </remarks>
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>        
         [HttpGet]
