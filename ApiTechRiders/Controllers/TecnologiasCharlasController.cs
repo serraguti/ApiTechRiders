@@ -107,6 +107,31 @@ namespace ApiTechRiders.Controllers
             return peticionNew;
         }
 
+        // POST: api/tecnologiascharlas/{idcharla}/{idtecnologia}
+        /// <summary>
+        /// Crea un nuevo TECNOLOGIASCHARLAS en la BBDD, tabla TECNOLOGIASCHARLAS
+        /// </summary>
+        /// <remarks>
+        /// Este método asocia una Charla a una tecnología
+        /// </remarks>
+        /// <param name="idcharla">Id (GUID) del objeto CHARLA.</param>
+        /// <param name="idtecnologia">Id (GUID) del objeto TECNOLOGIA.</param>  
+        /// <response code="201">Created. Objeto correctamente creado en la BD.</response>        
+        /// <response code="500">BBDD. No se ha creado el objeto en la BD. Error en la BBDD.</response>/// 
+        [HttpPost]
+        [Route("[action]/{idcharla}/{idtecnologia}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
+        public async Task<ActionResult<TecnologiaCharlas>>
+                CreateTecnologiaCharlas(int idcharla, int idtecnologia)
+        {
+            TecnologiaCharlas peticionNew =
+                    await this.repo.InsertTecnologiaCharlasAsync
+                    (idcharla, idtecnologia);
+            return peticionNew;
+        }
+
         // DELETE: api/tecnologiascharlas/{idcharla}/{idtecnologia}
         /// <summary>
         /// Elimina una tecnología en una Charla. 
