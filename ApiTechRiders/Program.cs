@@ -17,7 +17,7 @@ builder.Services.AddProblemDetails();
 
 // Add services to the container.
 string connectionString =
-    builder.Configuration.GetConnectionString("SqlLocal");
+    builder.Configuration.GetConnectionString("SqlAzure");
 builder.Services.AddTransient<RepositoryTechRiders>();
 builder.Services.AddDbContext<TechRidersContext>
     (options => options.UseSqlServer(connectionString));
